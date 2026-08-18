@@ -1,0 +1,6 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor/tooling config not relevant to the deployed site
+.claude/
