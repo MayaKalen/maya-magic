@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toolkit · Maya Kalen</title>
+<meta name="description" content="The full technology stack behind Maya Kalen's work: design tools, development platforms, programming languages, automation, hosting and SEO tools.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress-bar" id="scroll-progress-bar"></div></div>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="icon-potion" viewBox="0 0 48 48"><path d="M19 6h10v9l8 17c1.7 3.6-1 7-5 7H16c-4 0-6.7-3.4-5-7l8-17Z"/><path d="M19 6h10"/><path d="M14 30h20"/><circle cx="20" cy="24" r="1.2" fill="currentColor" stroke="none"/><circle cx="27" cy="21" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-quill" viewBox="0 0 48 48"><path d="M38 8C24 10 14 22 10 38c8-2 16-6 20-14"/><path d="M38 8c-2 6-4 10-8 14"/><path d="M10 38l4-4"/></symbol>
+  <symbol id="icon-tower" viewBox="0 0 48 48"><path d="M24 6l6 6H18Z"/><rect x="14" y="16" width="20" height="7" rx="2"/><rect x="10" y="27" width="28" height="7" rx="2"/><rect x="6" y="38" width="36" height="4" rx="2"/></symbol>
+  <symbol id="icon-rune" viewBox="0 0 48 48"><path d="M24 6 40 15v18L24 42 8 33V15Z"/><path d="M18 20l6 8 6-8"/></symbol>
+  <symbol id="icon-spark-gear" viewBox="0 0 48 48"><circle cx="20" cy="26" r="9"/><path d="M20 13v4M20 35v4M9 26h4M27 26h4M12.5 18.5l2.8 2.8M27.7 30.7l2.8 2.8M12.5 33.5l2.8-2.8M27.7 21.3l2.8-2.8"/><path d="M36 8l1.6 3.4L41 13l-3.4 1.6L36 18l-1.6-3.4L31 13l3.4-1.6Z"/></symbol>
+  <symbol id="icon-crystal" viewBox="0 0 48 48"><path d="M14 40 10 22l8-10 8 10-4 18Z"/><path d="M30 40l-3-14 6-8 6 8-3 14Z"/></symbol>
+  <symbol id="icon-telescope" viewBox="0 0 48 48"><path d="M8 32 34 12l4 6-26 20Z"/><path d="M14 26l6 8"/><path d="M8 38l4-4"/><circle cx="38" cy="10" r="1.3" fill="currentColor" stroke="none"/><path d="M40 6l1 2 2 1-2 1-1 2-1-2-2-1 2-1Z"/></symbol>
+  <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+</svg>
+
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="Maya Kalen home, click to cast a spell">
+      <span class="brand-text">
+        <span class="brand-name">Maya Kalen</span>
+        <span class="brand-role">Web Developer &amp; Designer</span>
+      </span>
+    </a>
+    <nav class="site-nav" id="site-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="toolkit.html" class="nav-link active">Toolkit</a>
+      <a href="process.html" class="nav-link">Process</a>
+      <a href="portfolio.html" class="nav-link">Portfolio</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <a href="contact.html" class="btn btn-primary btn-small header-cta magnetic">Let's Talk</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="magic-toast" id="magic-toast" role="status" aria-live="polite"></div>
+
+<main>
+
+<section class="hero page-hero">
+  <div class="blob-layer" aria-hidden="true">
+    <div class="blob blob-green" style="width:340px; height:340px; top:-150px; right:-140px;"></div>
+  </div>
+  <div class="floaties" aria-hidden="true">
+    <span class="floaty prop alt" style="top:10%; left:6%; animation-duration:9s;">🪶</span>
+    <span class="floaty spark small" style="top:14%; right:10%; animation-duration:6.8s; animation-delay:.4s;">✦</span>
+    <span class="floaty prop small" style="bottom:6%; left:22%; animation-duration:8.2s; animation-delay:.6s;">🖥️</span>
+    <span class="floaty prop alt" style="top:4%; right:24%; animation-duration:9.4s; animation-delay:.3s;">🌲</span>
+    <span class="floaty prop small alt" style="bottom:10%; right:6%; animation-duration:7.6s; animation-delay:1s;">🦉</span>
+  </div>
+  <div class="container">
+    <p class="eyebrow" data-animate>The Toolkit</p>
+    <h1 data-animate>Ingredients of My Magic</h1>
+    <p class="hero-text section-lede" data-animate style="margin-left:auto; margin-right:auto;">Every platform, language, and tool I reach for when a project calls for it. Tap a jar to see what's inside.</p>
+  </div>
+</section>
+
+<section class="tools">
+  <div class="container">
+    <div class="ingredients-wrap">
+      <div class="ingredients-art" data-animate>
+        <svg class="icon"><use href="#icon-potion"/></svg>
+        <h3>Stocked &amp; Ready</h3>
+        <p>Six shelves, one cabinet, always stocked.</p>
+        <div class="ingredients-jarshelf" aria-hidden="true">
+          <span>🫙</span><span>🧪</span><span>🍯</span>
+        </div>
+      </div>
+
+      <div class="cabinet" id="cabinet" data-animate>
+        <div class="cabinet-doors" id="cabinet-doors">
+          <div class="cabinet-door cabinet-door-left"><span class="cabinet-knob" aria-hidden="true"></span></div>
+          <div class="cabinet-door cabinet-door-right"><span class="cabinet-knob" aria-hidden="true"></span></div>
+          <div class="cabinet-prompt" aria-hidden="true">
+            <span class="cabinet-prompt-icon">🗝️</span>
+            <span>Click to open the cabinet</span>
+          </div>
+        </div>
+      <div class="accordion">
+        <div class="accordion-item open">
+          <button class="accordion-head" aria-expanded="true">
+            <svg class="icon"><use href="#icon-quill"/></svg>
+            <h3>Design Tools</h3>
+            <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
+            <div class="chips">
+              <span class="chip">Figma</span>
+              <span class="chip">Adobe Photoshop</span>
+              <span class="chip">Illustrator</span>
+              <span class="chip">InDesign</span>
+              <span class="chip">Canva</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-head" aria-expanded="false">
+            <svg class="icon"><use href="#icon-tower"/></svg>
+            <h3>Development Platforms</h3>
+            <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
+            <div class="chips">
+              <span class="chip">WordPress</span>
+              <span class="chip">Shopify</span>
+              <span class="chip">Webflow</span>
+              <span class="chip">Squarespace</span>
+              <span class="chip">HubSpot</span>
+              <span class="chip">Wix</span>
+              <span class="chip">Go High Level</span>
+              <span class="chip">Kajabi</span>
+              <span class="chip">Kartra</span>
+              <span class="chip">ClickFunnels</span>
+              <span class="chip">Mailchimp</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-head" aria-expanded="false">
+            <svg class="icon"><use href="#icon-rune"/></svg>
+            <h3>Programming Languages</h3>
+            <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
+            <div class="chips">
+              <span class="chip">PHP</span>
+              <span class="chip">Laravel</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">React JS</span>
+              <span class="chip">Node JS</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-head" aria-expanded="false">
+            <svg class="icon"><use href="#icon-spark-gear"/></svg>
+            <h3>AI Automation &amp; Integration</h3>
+            <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
+            <div class="chips">
+              <span class="chip">Zapier</span>
+              <span class="chip">Make.com</span>
+              <span class="chip">n8n</span>
+              <span class="chip">Zoho</span>
+              <span class="chip">ChatGPT</span>
+              <span class="chip">Claude</span>
+              <span class="chip">Perplexity.ai</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-head" aria-expanded="false">
+            <svg class="icon"><use href="#icon-crystal"/></svg>
+            <h3>Hosting &amp; Databases</h3>
+            <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
+            <div class="chips">
+              <span class="chip">AWS</span>
+              <span class="chip">Firebase</span>
+              <span class="chip">Digital Ocean</span>
+              <span class="chip">SQL</span>
+              <span class="chip">MySQL</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">Hostinger</span>
+              <span class="chip">GoDaddy</span>
+              <span class="chip">Cloudflare</span>
+              <span class="chip">GitHub</span>
+              <span class="chip">GitLab</span>
+              <span class="chip">Bitbucket</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-head" aria-expanded="false">
+            <svg class="icon"><use href="#icon-telescope"/></svg>
+            <h3>SEO &amp; Analytics</h3>
+            <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
+            <div class="chips">
+              <span class="chip">Google Search Console</span>
+              <span class="chip">Google Analytics</span>
+              <span class="chip">Yoast SEO</span>
+              <span class="chip">Rank Math</span>
+              <span class="chip">SEMrush</span>
+              <span class="chip">Ahrefs</span>
+              <span class="chip">Screaming Frog</span>
+            </div>
+          </div></div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="process-cta">
+      <a href="process.html" class="btn btn-gold magnetic" data-animate>See My Process <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> Maya Kalen. All rights reserved.</p>
+    <a href="#top" class="back-to-top">Back to top ↑</a>
+  </div>
+</footer>
+
+<a href="mailto:kalen.mayaa@gmail.com" class="email-fab" id="email-fab" aria-label="Email Maya Kalen">
+  <span aria-hidden="true">✉️</span>
+  <span class="email-fab-text">Email Me</span>
+</a>
+
+<div class="wisp-wrap">
+  <div class="wisp-bubble" id="wisp-bubble"></div>
+  <button class="wisp" id="wisp" aria-label="Say hi to Wisp, my magic companion">
+    <span class="wisp-emoji" aria-hidden="true">🐈‍⬛</span>
+  </button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

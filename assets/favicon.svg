@@ -1,6 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-  <rect width="40" height="40" rx="8" fill="#fdf1e3"/>
-  <path d="M9 8H15V26H23V31H9V8Z" fill="#2e9c77"/>
-  <rect x="20" y="12" width="12" height="9" rx="1.6" stroke="#3a3a3a" stroke-width="2"/>
-  <path d="M23.5 27L20.5 31.5H28.5L25.5 27" stroke="#3a3a3a" stroke-width="2" stroke-linejoin="round"/>
+  <rect width="40" height="40" rx="9" fill="#fff8ea"/>
+  <g transform="rotate(-40 20 20)">
+    <rect x="18.7" y="9" width="2.6" height="17" rx="1.3" fill="#3f7d5c"/>
+    <rect x="14.2" y="24" width="11.6" height="3.2" rx="1.6" fill="#e78f2e"/>
+  </g>
+  <g fill="#e78f2e">
+    <path d="M11 11l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z"/>
+    <path d="M29 23l0.7 1.8 1.8 0.7-1.8 0.7-0.7 1.8-0.7-1.8-1.8-0.7 1.8-0.7z"/>
+  </g>
 </svg>
