@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About · Maya Kalen</title>
+<meta name="description" content="The story behind Maya Kalen, a web developer and designer with 7+ years of experience across WordPress, Shopify, Webflow, HubSpot, Squarespace and Go High Level. Welcome to Maya Magic.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress-bar" id="scroll-progress-bar"></div></div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="Maya Kalen home, click to cast a spell">
+      <span class="brand-text">
+        <span class="brand-name">Maya Kalen</span>
+        <span class="brand-role">Web Developer &amp; Designer</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" id="site-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="toolkit.html" class="nav-link">Toolkit</a>
+      <a href="process.html" class="nav-link">Process</a>
+      <a href="portfolio.html" class="nav-link">Portfolio</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <a href="contact.html" class="btn btn-primary btn-small header-cta magnetic">Let's Talk</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="magic-toast" id="magic-toast" role="status" aria-live="polite"></div>
+
+<main>
+
+<!-- ================= ABOUT HERO ================= -->
+<section class="hero" id="about-top">
+  <div class="blob-layer" aria-hidden="true">
+    <div class="blob blob-green" style="width:400px; height:400px; top:-140px; left:-150px;"></div>
+    <div class="blob blob-tan" style="width:360px; height:360px; bottom:-160px; right:-120px; animation-delay:2s;"></div>
+  </div>
+  <div class="floaties" aria-hidden="true">
+    <span class="floaty spark" style="top:12%; left:5%; animation-duration:7.8s;">✦</span>
+    <span class="floaty ring-shape" style="bottom:14%; left:10%; animation-duration:9.4s; animation-delay:.5s;"></span>
+    <span class="floaty prop alt" style="top:14%; right:4%; animation-duration:9s; animation-delay:.4s;">🔮</span>
+    <span class="floaty prop small alt" style="bottom:8%; right:16%; animation-duration:8s; animation-delay:.9s;">🌙</span>
+    <span class="floaty prop small" style="top:60%; left:10%; animation-duration:7.4s; animation-delay:.3s;">🪶</span>
+    <span class="floaty prop alt" style="top:4%; left:22%; animation-duration:9.6s; animation-delay:.2s;">🌳</span>
+    <span class="floaty prop small alt" style="bottom:4%; right:30%; animation-duration:8.2s; animation-delay:.7s;">🦊</span>
+  </div>
+
+  <div class="container hero-grid">
+    <div class="hero-copy" data-animate>
+      <p class="eyebrow">About Me</p>
+      <h1>The Story So Far</h1>
+      <p class="hero-tagline script">I design websites using Maya Magic 🪄</p>
+      <p class="hero-text">
+        I'm Maya, a web developer and designer who has spent the last 7+ years
+        turning ideas into online businesses that actually work. Here's how I
+        got here.
+      </p>
+
+      <div class="hero-actions">
+        <a href="contact.html" class="btn btn-primary magnetic">Let's Work Together</a>
+        <a href="index.html" class="btn btn-outline magnetic">&larr; Back to Home</a>
+      </div>
+    </div>
+
+    <div class="maya-avatar-wrap" data-animate>
+      <div class="wisp-bubble maya-fact-bubble" id="avatar-bubble"></div>
+      <button class="maya-avatar" id="maya-avatar" aria-label="Click Maya for a fun fact about her">
+        <svg class="maya-avatar-svg" viewBox="0 0 200 240" aria-hidden="true">
+          <!-- hair, behind the face, flowing past the shoulders -->
+          <path d="M100 34c-40 0-62 30-62 68 0 34 6 62 16 82h20c-10-24-14-46-11-70 4 8 10 14 18 17-4-16-2-32 6-42 6 12 18 20 31 22-6-14-4-30 6-40 8 12 22 19 36 20-4 16-2 34 6 50h20c10-20 16-48 16-82 0-38-22-68-62-68Z" fill="var(--ink)"/>
+          <!-- face -->
+          <circle cx="100" cy="116" r="54" fill="var(--sand)"/>
+          <!-- soft fringe over the forehead -->
+          <path d="M50 100c6-30 24-48 50-48s44 18 50 48c-14-10-32-16-50-16s-36 6-50 16Z" fill="var(--ink)"/>
+          <!-- blush -->
+          <circle cx="72" cy="130" r="7" fill="var(--gold)" opacity="0.32"/>
+          <circle cx="128" cy="130" r="7" fill="var(--gold)" opacity="0.32"/>
+          <!-- eyes with little lashes -->
+          <g class="maya-avatar-eyes">
+            <circle cx="82" cy="118" r="5.5" fill="var(--ink)"/>
+            <circle cx="118" cy="118" r="5.5" fill="var(--ink)"/>
+            <path d="M73 108c4-4 10-5 15-3" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <path d="M112 105c5-2 11 0 15 3" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- smile -->
+          <path d="M85 138c6 7 24 7 30 0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- witch hat, tilted -->
+          <g transform="translate(100 32) rotate(-10)">
+            <path d="M0 -50 L-28 4 L28 4 Z" fill="var(--ink)"/>
+            <rect x="-38" y="0" width="76" height="9" rx="4.5" fill="var(--ink)"/>
+            <path d="M0 -50l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="var(--gold)"/>
+          </g>
+        </svg>
+      </button>
+      <span class="maya-avatar-hint">Click me for a fact ✨</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BIO ================= -->
+<section class="about-bio">
+  <div class="floaties" aria-hidden="true">
+    <span class="floaty prop small alt" style="top:6%; right:6%; animation-duration:8.4s;">🧪</span>
+    <span class="floaty prop small" style="bottom:8%; left:8%; animation-duration:7.8s; animation-delay:.5s;">💻</span>
+    <span class="floaty prop alt" style="top:40%; right:2%; animation-duration:9.2s; animation-delay:.3s;">🦉</span>
+  </div>
+  <div class="container about-bio-inner">
+    <p class="eyebrow" data-animate>My Background</p>
+    <h2 data-animate>A Bit More About Me</h2>
+
+    <div class="about-copy" data-animate>
+      <p>
+        I hold a bachelor's degree in Computer Science and Engineering, and
+        I've spent a bit over seven years since then building, designing,
+        and growing websites for businesses around the world.
+      </p>
+      <p>
+        Along the way I've worked as a freelance developer and individual
+        contractor, as part of small teams, and alongside agencies, across
+        technologies like WordPress, Shopify, Webflow, HubSpot, Squarespace,
+        Wix, and Go High Level. I'm proficient in HTML, CSS, JavaScript, and
+        PHP, so I can custom code inside almost any CMS, and I'm just as
+        comfortable in React on the front end and Node on the back end.
+      </p>
+      <p>
+        Beyond development, I work in SEO, graphic design, marketing, and
+        automation, and I'm currently learning new AI tools for both design
+        and automation. That's what I mean by <em>Maya Magic</em>: not a
+        trick, just years of craft applied with care, so your site looks
+        beautiful, runs smoothly, and actually moves your business forward.
+        I believe actions speak louder than words, so I'd rather show you my
+        work than just tell you about it.
+      </p>
+    </div>
+
+    <div class="constellation about-stats" data-animate style="max-width:600px;">
+      <svg class="const-line" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M100,120 C170,50 230,150 300,80 C370,150 430,50 500,120" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-dasharray="2 12" stroke-linecap="round"/>
+      </svg>
+      <div class="const-node">
+        <span class="const-circle"><span class="const-num">150+</span></span>
+        <span class="const-label">Projects Completed</span>
+      </div>
+      <div class="const-node">
+        <span class="const-circle"><span class="const-num">100%</span></span>
+        <span class="const-label">Client Satisfaction</span>
+      </div>
+      <div class="const-node">
+        <span class="const-circle"><span class="const-num">7+</span></span>
+        <span class="const-label">Years of Experience</span>
+      </div>
+    </div>
+
+    <h3 class="about-skills-heading" data-animate>What I Work With</h3>
+    <div class="chips about-chips" data-animate>
+      <span class="chip">WordPress</span>
+      <span class="chip">Shopify</span>
+      <span class="chip">Webflow</span>
+      <span class="chip">HubSpot</span>
+      <span class="chip">Squarespace</span>
+      <span class="chip">Wix</span>
+      <span class="chip">Go High Level</span>
+      <span class="chip">Graphic Design</span>
+      <span class="chip">SEO</span>
+      <span class="chip">Automation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOSING CTA ================= -->
+<section class="about-cta">
+  <div class="blob-layer" aria-hidden="true">
+    <div class="blob blob-tan" style="width:360px; height:360px; top:-130px; right:-120px;"></div>
+  </div>
+  <div class="floaties" aria-hidden="true">
+    <span class="floaty prop small alt" style="bottom:10%; left:8%; animation-duration:8s;">🌙</span>
+    <span class="floaty prop small" style="top:10%; right:14%; animation-duration:7.6s; animation-delay:.4s;">🦋</span>
+  </div>
+  <div class="container" style="text-align:center;" data-animate>
+    <h2>Want to Work Together?</h2>
+    <p class="section-lede" style="margin:0 auto 28px;">
+      I'd love to hear about your project and see how I can help it grow.
+    </p>
+    <a href="contact.html" class="btn btn-primary magnetic">Get In Touch</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> Maya Kalen. All rights reserved.</p>
+    <a href="#top" class="back-to-top">Back to top &uarr;</a>
+  </div>
+</footer>
+
+<a href="mailto:kalen.mayaa@gmail.com" class="email-fab" id="email-fab" aria-label="Email Maya Kalen">
+  <span aria-hidden="true">✉️</span>
+  <span class="email-fab-text">Email Me</span>
+</a>
+
+<div class="wisp-wrap">
+  <div class="wisp-bubble" id="wisp-bubble"></div>
+  <button class="wisp" id="wisp" aria-label="Say hi to Wisp, my magic companion">
+    <span class="wisp-emoji" aria-hidden="true">🐈‍⬛</span>
+  </button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

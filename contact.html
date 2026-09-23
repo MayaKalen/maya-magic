@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact · Maya Kalen</title>
+<meta name="description" content="Get in touch with Maya Kalen, web developer and designer, by email or Instagram, or make a wish.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress-bar" id="scroll-progress-bar"></div></div>
+
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="Maya Kalen home, click to cast a spell">
+      <span class="brand-text">
+        <span class="brand-name">Maya Kalen</span>
+        <span class="brand-role">Web Developer &amp; Designer</span>
+      </span>
+    </a>
+    <nav class="site-nav" id="site-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="toolkit.html" class="nav-link">Toolkit</a>
+      <a href="process.html" class="nav-link">Process</a>
+      <a href="portfolio.html" class="nav-link">Portfolio</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+    <a href="contact.html" class="btn btn-primary btn-small header-cta magnetic">Let's Talk</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="magic-toast" id="magic-toast" role="status" aria-live="polite"></div>
+
+<main>
+
+<section class="contact" id="contact" style="padding-top:56px;">
+  <div class="blob-layer" aria-hidden="true">
+    <div class="blob blob-green" style="width:380px; height:380px; top:-140px; right:-140px;"></div>
+    <div class="blob blob-tan" style="width:320px; height:320px; bottom:-140px; left:-120px; animation-delay:2.4s;"></div>
+  </div>
+  <div class="floaties" aria-hidden="true">
+    <span class="floaty spark" style="top:14%; left:8%; animation-duration:7.2s;">✦</span>
+    <span class="floaty spark small" style="bottom:16%; right:10%; animation-duration:6.6s; animation-delay:.5s;">✦</span>
+    <span class="floaty prop small alt" style="top:60%; left:4%; animation-duration:8.8s; animation-delay:.8s;">🔮</span>
+    <span class="floaty prop small alt" style="bottom:8%; right:20%; animation-duration:7.8s; animation-delay:.2s;">🪶</span>
+    <span class="floaty prop alt" style="top:4%; right:28%; animation-duration:9.4s; animation-delay:.4s;">🌳</span>
+    <span class="floaty prop small" style="bottom:20%; left:24%; animation-duration:7.6s; animation-delay:.6s;">🦉</span>
+  </div>
+  <div class="container invite-wrap">
+    <div class="invite-card sparkle-host" data-animate>
+      <span class="wax-seal" aria-hidden="true">🪄</span>
+      <p class="eyebrow">Contact</p>
+      <h1>Let's Work Together</h1>
+      <p class="section-lede invite-lede">Have a project in mind? I'd love to help bring it to life.
+        Reach out and let's talk about how I can support your business online.</p>
+      <a href="mailto:kalen.mayaa@gmail.com" class="btn btn-primary magnetic btn-glow">Email Me</a>
+
+      <div class="contact-pills">
+        <a class="contact-pill" href="https://www.instagram.com/web.developer_mayaa/" target="_blank" rel="noopener">
+          <span aria-hidden="true">📸</span> @web.developer_mayaa
+        </a>
+        <a class="contact-pill" href="portfolio.html">
+          <span aria-hidden="true">🪄</span> See My Magic Universe
+        </a>
+      </div>
+
+      <div class="wish-widget">
+        <h3>Make a Wish ✨</h3>
+        <p>Type anything, a project idea, a hope for your site, and leave your email. Maya's magic will find its way to your inbox.</p>
+        <form class="wish-form" id="wish-form" action="https://formspree.io/f/xoevwvza" method="POST">
+          <input class="wish-input" id="wish-input" name="wish" type="text" maxlength="120" placeholder="I wish my website could..." aria-label="Make a wish" required>
+          <input class="wish-input" id="wish-email" name="email" type="email" placeholder="you@example.com" aria-label="Your email" required>
+          <button type="submit" class="btn btn-gold magnetic">Make a Wish</button>
+        </form>
+        <p class="wish-response" id="wish-response" aria-live="polite"></p>
+        <p class="wish-count" id="wish-count"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> Maya Kalen. All rights reserved.</p>
+    <a href="#top" class="back-to-top">Back to top ↑</a>
+  </div>
+</footer>
+
+<a href="mailto:kalen.mayaa@gmail.com" class="email-fab is-hidden" id="email-fab" aria-label="Email Maya Kalen">
+  <span aria-hidden="true">✉️</span>
+  <span class="email-fab-text">Email Me</span>
+</a>
+
+<div class="wisp-wrap">
+  <div class="wisp-bubble" id="wisp-bubble"></div>
+  <button class="wisp" id="wisp" aria-label="Say hi to Wisp, my magic companion">
+    <span class="wisp-emoji" aria-hidden="true">🐈‍⬛</span>
+  </button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
