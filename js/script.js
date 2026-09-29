@@ -294,6 +294,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ---- About hero: Maya's eyes track the real cursor, and the whole
+  // scene drifts toward it, effortlessly, no click needed ----
+  const aboutHero = document.getElementById('about-top');
+  const avatarEyes = document.querySelector('.maya-avatar-eyes');
+  const avatarWrap = document.querySelector('.maya-avatar-wrap');
+  const aboutFloaties = aboutHero ? aboutHero.querySelector('.floaties') : null;
+
+  if (aboutHero && avatarEyes && avatarWrap && !prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    const EYE_RANGE = 4.5;
+    const AVATAR_RANGE = 14;
+    const FLOATY_RANGE = 8;
+
+    aboutHero.addEventListener('mousemove', (e) => {
+      const heroRect = aboutHero.getBoundingClientRect();
+      const heroCx = heroRect.left + heroRect.width / 2;
+      const heroCy = heroRect.top + heroRect.height / 2;
+      const nx = Math.max(-1, Math.min(1, (e.clientX - heroCx) / (heroRect.width / 2)));
+      const ny = Math.max(-1, Math.min(1, (e.clientY - heroCy) / (heroRect.height / 2)));
+
+      // eyes look straight at the actual pointer position
+      const eyeRect = avatarEyes.getBoundingClientRect();
+      const eyeCx = eyeRect.left + eyeRect.width / 2;
+      const eyeCy = eyeRect.top + eyeRect.height / 2;
+      const ex = e.clientX - eyeCx;
+      const ey = e.clientY - eyeCy;
+      const eDist = Math.hypot(ex, ey) || 1;
+      const eScale = Math.min(1, eDist / 220) * EYE_RANGE;
+      avatarEyes.style.transform = `translate(${(ex / eDist * eScale).toFixed(2)}px, ${(ey / eDist * eScale).toFixed(2)}px)`;
+
+      // the whole avatar leans toward the cursor, a little
+      avatarWrap.style.transform = `translate(${(nx * AVATAR_RANGE).toFixed(1)}px, ${(ny * AVATAR_RANGE * 0.6).toFixed(1)}px)`;
+
+      // ambient props drift the opposite way, for a touch of depth
+      if (aboutFloaties) {
+        aboutFloaties.style.transform = `translate(${(-nx * FLOATY_RANGE).toFixed(1)}px, ${(-ny * FLOATY_RANGE).toFixed(1)}px)`;
+      }
+    }, { passive: true });
+
+    aboutHero.addEventListener('mouseleave', () => {
+      avatarEyes.style.transform = 'translate(0, 0)';
+      avatarWrap.style.transform = 'translate(0, 0)';
+      if (aboutFloaties) aboutFloaties.style.transform = 'translate(0, 0)';
+    });
+  }
+
   // ---- Services page: click a flip-card to see the back ----
   document.querySelectorAll('.flip-card').forEach((card) => {
     card.addEventListener('click', (e) => {
