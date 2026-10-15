@@ -70,66 +70,84 @@
     <span class="floaty prop small alt" style="top:40%; right:10%; animation-duration:7.6s; animation-delay:1s;">✨</span>
   </div>
   <div class="container">
-    <p class="section-lede" style="margin:0 auto 10px; text-align:center;" data-animate>Every project passes through four little worlds. Hover a stop to look inside.</p>
+    <p class="section-lede" style="margin:0 auto 10px; text-align:center;" data-animate>Every project passes through four little worlds. Follow the trail from a first hello to a site that keeps on working.</p>
 
-    <div class="world-path">
-      <svg class="world-path-line" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M60,270 C170,270 220,90 340,90 C460,90 500,300 630,300 C750,300 790,70 920,70" fill="none" stroke="var(--gold)" stroke-width="3" stroke-dasharray="2 16" stroke-linecap="round"/>
+    <div class="journey" id="journey">
+      <svg class="journey-line" aria-hidden="true">
+        <path class="journey-glow" />
+        <path class="journey-trail" />
       </svg>
+      <span class="journey-spark" aria-hidden="true"></span>
 
-      <div class="world-stop sparkle-host" data-animate style="left:6%; top:66%;">
-        <span class="world-badge" style="--stop-color: var(--green);" aria-hidden="true">🌲</span>
-        <div class="world-text">
-          <span class="world-num">Step 01</span>
-          <span class="world-name">Whispering Woods</span>
-          <div class="world-card">
+      <ol class="journey-stops">
+        <li class="journey-stop sparkle-host" data-animate style="--stop-color: var(--green);">
+          <span class="journey-badge" aria-hidden="true">🌲</span>
+          <p class="journey-num">Step 01</p>
+          <p class="journey-world">Whispering Woods</p>
+          <div class="journey-card">
             <h3>Discovery &amp; Vision</h3>
             <p>Understanding your brand, your goals, and the feeling you want your site to hold.</p>
+            <ul class="journey-list">
+              <li>A friendly kickoff call</li>
+              <li>Goals, audience and must haves</li>
+              <li>A clear plan and sitemap</li>
+            </ul>
           </div>
-        </div>
-      </div>
+        </li>
 
-      <div class="world-stop sparkle-host" data-animate style="left:34%; top:22%;">
-        <span class="world-badge" style="--stop-color: var(--sand-dark);" aria-hidden="true">🏜️</span>
-        <div class="world-text">
-          <span class="world-num">Step 02</span>
-          <span class="world-name">Golden Dunes</span>
-          <div class="world-card">
+        <li class="journey-stop sparkle-host" data-animate style="--stop-color: var(--sand-dark);">
+          <span class="journey-badge" aria-hidden="true">🏜️</span>
+          <p class="journey-num">Step 02</p>
+          <p class="journey-world">Golden Dunes</p>
+          <div class="journey-card">
             <h3>Design &amp; Prototype</h3>
             <p>Crafting the look and feel in Figma, blending beauty with usability.</p>
+            <ul class="journey-list">
+              <li>Moodboard and style direction</li>
+              <li>Page designs in Figma</li>
+              <li>Your feedback, then polish</li>
+            </ul>
           </div>
-        </div>
-      </div>
+        </li>
 
-      <div class="world-stop sparkle-host" data-animate style="left:63%; top:72%;">
-        <span class="world-badge" style="--stop-color: var(--gold);" aria-hidden="true">⛰️</span>
-        <div class="world-text">
-          <span class="world-num">Step 03</span>
-          <span class="world-name">Terracotta Peaks</span>
-          <div class="world-card">
+        <li class="journey-stop sparkle-host" data-animate style="--stop-color: var(--gold);">
+          <span class="journey-badge" aria-hidden="true">⛰️</span>
+          <p class="journey-num">Step 03</p>
+          <p class="journey-world">Terracotta Peaks</p>
+          <div class="journey-card">
             <h3>Development &amp; Build</h3>
             <p>Bringing the design to life on WordPress, Shopify, Webflow, or fully custom code.</p>
+            <ul class="journey-list">
+              <li>Responsive on every screen</li>
+              <li>SEO and speed baked in</li>
+              <li>Forms, tools and automations connected</li>
+            </ul>
           </div>
-        </div>
-      </div>
+        </li>
 
-      <div class="world-stop sparkle-host" data-animate style="left:92%; top:18%;">
-        <span class="world-badge" style="--stop-color: var(--ink);" aria-hidden="true">🌙</span>
-        <div class="world-text">
-          <span class="world-num">Step 04</span>
-          <span class="world-name">Cocoa Sky</span>
-          <div class="world-card">
+        <li class="journey-stop sparkle-host" data-animate style="--stop-color: var(--ink);">
+          <span class="journey-badge" aria-hidden="true">🌙</span>
+          <p class="journey-num">Step 04</p>
+          <p class="journey-world">Cocoa Sky</p>
+          <div class="journey-card">
             <h3>Launch &amp; Support</h3>
             <p>Testing, optimizing, and staying by your side as your business grows.</p>
+            <ul class="journey-list">
+              <li>Testing across devices</li>
+              <li>A smooth launch day</li>
+              <li>Ongoing care and updates</li>
+            </ul>
           </div>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
 
     <div class="process-cta">
       <a href="about.html" class="btn btn-primary magnetic" data-animate>Read My Story <span aria-hidden="true">→</span></a>
+      <a href="contact.html" class="btn btn-outline magnetic" data-animate>Start Your Project</a>
     </div>
   </div>
+
 </section>
 
 </main>

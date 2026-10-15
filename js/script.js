@@ -69,12 +69,182 @@ document.addEventListener('DOMContentLoaded', () => {
     animatedEls.forEach((el) => el.classList.add('in-view'));
   }
 
+  // ---- Process journey: draw the trail through the real badge positions ----
+  const journey = document.getElementById('journey');
+  if (journey) {
+    const svgLine = journey.querySelector('.journey-line');
+    const glow = journey.querySelector('.journey-glow');
+    const trail = journey.querySelector('.journey-trail');
+    const spark = journey.querySelector('.journey-spark');
+    const badges = [...journey.querySelectorAll('.journey-badge')];
+    const reduceJourneyMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let drawn = false;
+
+    const drawTrail = () => {
+      const box = journey.getBoundingClientRect();
+      const pts = badges.map((badge) => {
+        const r = badge.getBoundingClientRect();
+        return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2 };
+      });
+      const horizontal = Math.abs(pts[1].x - pts[0].x) > 20;
+      let d = `M${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+      for (let i = 1; i < pts.length; i += 1) {
+        const a = pts[i - 1];
+        const b = pts[i];
+        const c1 = horizontal ? [a.x + (b.x - a.x) / 2, a.y] : [a.x, a.y + (b.y - a.y) / 2];
+        const c2 = horizontal ? [b.x - (b.x - a.x) / 2, b.y] : [b.x, b.y - (b.y - a.y) / 2];
+        d += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`;
+      }
+
+      svgLine.setAttribute('viewBox', `0 0 ${box.width.toFixed(0)} ${box.height.toFixed(0)}`);
+      glow.setAttribute('d', d);
+      trail.setAttribute('d', d);
+      if (spark) spark.style.offsetPath = `path('${d}')`;
+
+      const length = glow.getTotalLength();
+      glow.style.transition = 'none';
+      glow.style.strokeDasharray = `${length}`;
+      glow.style.strokeDashoffset = drawn || reduceJourneyMotion ? '0' : `${length}`;
+      void glow.getBoundingClientRect();
+      glow.style.transition = '';
+    };
+
+    drawTrail();
+    if ('ResizeObserver' in window) new ResizeObserver(drawTrail).observe(journey);
+    window.addEventListener('load', drawTrail);
+
+    const revealTrail = () => {
+      drawn = true;
+      glow.style.strokeDashoffset = '0';
+      journey.classList.add('is-drawn');
+    };
+    if (reduceJourneyMotion || !('IntersectionObserver' in window)) {
+      revealTrail();
+    } else {
+      new IntersectionObserver((entries, obs) => {
+        if (entries[0].isIntersecting) { revealTrail(); obs.disconnect(); }
+      }, { threshold: 0.25 }).observe(journey);
+    }
+  }
+
   // ---- Portfolio bookcase: hero stats always match the real shelves ----
   const shelfBooks = document.querySelectorAll('.bookcase .book');
   if (shelfBooks.length) {
     const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
     setText('project-total', shelfBooks.length);
     setText('platform-total', document.querySelectorAll('.bookcase .shelf').length);
+  }
+
+  // ---- Portfolio bookcase: pull a book off the shelf to see its cover ----
+  const cover = document.getElementById('book-cover');
+  const coverBackdrop = document.getElementById('cover-backdrop');
+
+  if (cover && shelfBooks.length) {
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const coverReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coverEls = {
+      platform: document.getElementById('cover-platform'),
+      emblem: document.getElementById('cover-emblem'),
+      title: document.getElementById('cover-title'),
+      host: document.getElementById('cover-host'),
+      cta: document.getElementById('cover-cta'),
+      close: document.getElementById('cover-close'),
+    };
+    let activeBook = null;
+    let showTimer = null;
+    let hideTimer = null;
+
+    const fillCover = (book) => {
+      const shelf = book.closest('.shelf');
+      const plaque = shelf.querySelector('.shelf-plaque').cloneNode(true);
+      plaque.querySelectorAll('span, em').forEach((el) => el.remove());
+      coverEls.platform.textContent = plaque.textContent.trim();
+      coverEls.emblem.textContent = book.querySelector('.book-mono').textContent;
+      coverEls.title.textContent = book.querySelector('.book-title').textContent;
+      coverEls.host.textContent = book.querySelector('.book-tag').textContent.replace('↗', '').trim();
+      coverEls.cta.href = book.href;
+      const palette = [...book.classList].find((c) => /^p[1-6]$/.test(c)) || 'p1';
+      cover.className = `book-cover ${palette}`;
+      cover.style.setProperty('--cat', getComputedStyle(shelf).getPropertyValue('--cat'));
+    };
+
+    const placeCover = (book, modal) => {
+      const w = cover.offsetWidth;
+      const h = cover.offsetHeight;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      let left;
+      let top;
+      if (modal) {
+        left = (vw - w) / 2;
+        top = (vh - h) / 2;
+      } else {
+        // rise up out of the shelf, centred on the book, overlapping its top a little
+        const r = book.getBoundingClientRect();
+        left = r.left + r.width / 2 - w / 2;
+        top = r.top - h + 24;
+        if (top < 96) top = r.bottom - 24; // not enough room above: drop below instead
+        if (top + h > vh - 12) top = Math.max(96, vh - h - 12);
+      }
+      left = Math.min(Math.max(12, left), vw - w - 12);
+      cover.style.left = `${Math.round(left)}px`;
+      cover.style.top = `${Math.round(top)}px`;
+    };
+
+    const openCover = (book, modal = false) => {
+      clearTimeout(hideTimer);
+      if (activeBook && activeBook !== book) activeBook.classList.remove('is-out');
+      activeBook = book;
+      fillCover(book);
+      cover.classList.toggle('is-modal', modal);
+      placeCover(book, modal);
+      book.classList.add('is-out');
+      void cover.offsetWidth;
+      cover.classList.add('open');
+      if (modal && coverBackdrop) coverBackdrop.classList.add('open');
+      if (!coverReduceMotion && typeof spawnCardSparkle === 'function') spawnCardSparkle(cover.querySelector('.cover-face'), 5);
+    };
+
+    const closeCover = () => {
+      clearTimeout(showTimer);
+      cover.classList.remove('open');
+      if (coverBackdrop) coverBackdrop.classList.remove('open');
+      if (activeBook) activeBook.classList.remove('is-out');
+      activeBook = null;
+    };
+    const scheduleClose = () => {
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(closeCover, 220);
+    };
+
+    shelfBooks.forEach((book) => {
+      if (canHover) {
+        book.addEventListener('mouseenter', () => {
+          clearTimeout(hideTimer);
+          clearTimeout(showTimer);
+          showTimer = setTimeout(() => openCover(book), activeBook ? 0 : 110);
+        });
+        book.addEventListener('mouseleave', () => { clearTimeout(showTimer); scheduleClose(); });
+      } else {
+        // touch: the first tap takes the book off the shelf, the button opens the site
+        book.addEventListener('click', (e) => {
+          e.preventDefault();
+          openCover(book, true);
+        });
+      }
+      book.addEventListener('focus', () => { if (canHover) openCover(book); });
+      book.addEventListener('blur', () => { if (canHover) scheduleClose(); });
+    });
+
+    cover.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    cover.addEventListener('mouseleave', () => { if (!cover.classList.contains('is-modal')) scheduleClose(); });
+    coverEls.close.addEventListener('click', closeCover);
+    if (coverBackdrop) coverBackdrop.addEventListener('click', closeCover);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && activeBook) closeCover(); });
+    window.addEventListener('scroll', () => {
+      if (activeBook && !cover.classList.contains('is-modal')) placeCover(activeBook, false);
+    }, { passive: true });
+    window.addEventListener('resize', () => { if (activeBook) placeCover(activeBook, cover.classList.contains('is-modal')); });
   }
 
 
