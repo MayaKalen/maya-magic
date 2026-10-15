@@ -15,17 +15,6 @@
 
 <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress-bar" id="scroll-progress-bar"></div></div>
 
-<svg style="display:none" aria-hidden="true">
-  <symbol id="icon-book" viewBox="0 0 48 48"><path d="M24 14C20 10 12 9 7 11v25c5-2 13-1 17 3 4-4 12-5 17-3V11c-5-2-13-1-17 3Z"/><path d="M24 14v25"/><path d="M34 8l1.6 3.4L39 13l-3.4 1.6L34 18l-1.6-3.4L29 13l3.4-1.6Z"/></symbol>
-  <symbol id="icon-cart" viewBox="0 0 48 48"><circle cx="18" cy="40" r="3"/><circle cx="34" cy="40" r="3"/><path d="M6 10h6l5 24h20l5-16H15"/></symbol>
-  <symbol id="icon-bag" viewBox="0 0 48 48"><path d="M14 16h20l2 24H12Z"/><path d="M18 16v-4c0-3 2.5-5 6-5s6 2 6 5v4"/></symbol>
-  <symbol id="icon-code" viewBox="0 0 48 48"><path d="M17 14 7 24 17 34"/><path d="M31 14 41 24 31 34"/></symbol>
-  <symbol id="icon-puzzle" viewBox="0 0 48 48"><path d="M18 10h8v4a3 3 0 0 0 6 0v-4h6v8h-4a3 3 0 0 0 0 6h4v8h-6v-4a3 3 0 0 0-6 0v4h-8v-8h4a3 3 0 0 0 0-6h-4Z"/></symbol>
-  <symbol id="icon-flow" viewBox="0 0 48 48"><path d="M6 30c8 0 8-16 16-16s6 20 16 12"/><path d="M6 20c6 0 8-6 13-6"/></symbol>
-  <symbol id="icon-funnel" viewBox="0 0 48 48"><path d="M8 10h32l-11 15v11l-10 4V25Z"/></symbol>
-  <symbol id="icon-layers" viewBox="0 0 48 48"><path d="M24 8 42 18 24 28 6 18Z"/><path d="M6 26 24 36 42 26"/><path d="M6 34 24 44 42 34"/></symbol>
-  <symbol id="icon-stars" viewBox="0 0 48 48"><path d="M22 6l3.4 11 11 3.4-11 3.4-3.4 11-3.4-11-11-3.4 11-3.4Z"/><path d="M37 28l1.6 4.6 4.6 1.6-4.6 1.6L37 40.4l-1.6-4.6-4.6-1.6 4.6-1.6Z"/></symbol>
-</svg>
 
 <header class="site-header" id="top">
   <div class="header-inner">
@@ -65,186 +54,266 @@
   <div class="container">
     <p class="eyebrow" data-animate>Selected Work</p>
     <h1 data-animate>Spellbook of Projects</h1>
-    <p class="hero-text section-lede" data-animate style="margin-left:auto; margin-right:auto;">Every project below links straight to the live site. Filter by platform to browse.</p>
+    <p class="hero-text section-lede" data-animate style="margin-left:auto; margin-right:auto;">Real sites, live right now, built for businesses around the world. Pull any book off the shelf to open the live site.</p>
+    <div class="portfolio-stats" data-animate>
+      <span><strong id="project-total">38</strong> live projects</span>
+      <span><strong id="platform-total">8</strong> platforms</span>
+      <span><strong>7+</strong> years of magic</span>
+    </div>
   </div>
 </section>
 
-<section class="portfolio" style="padding-top:16px;">
+<section class="portfolio">
   <div class="container">
-    <div class="filter-bar" data-animate role="tablist" aria-label="Filter portfolio by platform">
-      <button class="filter-btn active" data-filter="all"><span class="pill"><svg class="icon filter-icon"><use href="#icon-stars"/></svg>All<span class="filter-count"></span></span></button>
-      <button class="filter-btn" data-filter="fullstack" style="--cat-color: var(--c-fullstack);"><span class="pill"><svg class="icon filter-icon"><use href="#icon-layers"/></svg>Full-Stack<span class="filter-count"></span></span></button>
-      <button class="filter-btn" data-filter="wordpress" style="--cat-color: var(--c-wordpress);"><span class="pill"><svg class="icon filter-icon"><use href="#icon-book"/></svg>WordPress<span class="filter-count"></span></span></button>
-      <button class="filter-btn" data-filter="woocommerce" style="--cat-color: var(--c-woocommerce);"><span class="pill"><svg class="icon filter-icon"><use href="#icon-cart"/></svg>WooCommerce<span class="filter-count"></span></span></button>
-      <button class="filter-btn" data-filter="shopify" style="--cat-color: var(--c-shopify);"><span class="pill"><svg class="icon filter-icon"><use href="#icon-bag"/></svg>Shopify<span class="filter-count"></span></span></button>
-      <button class="filter-btn" data-filter="phpjs" style="--cat-color: var(--c-phpjs);"><span class="pill"><svg class="icon filter-icon"><use href="#icon-code"/></svg>PHP/JS &amp; React<span class="filter-count"></span></span></button>
-      <button class="filter-btn" data-filter="wix" style="--cat-color: var(--c-wix);"><span class="pill"><svg class="icon filter-icon"><use href="#icon-puzzle"/></svg>Wix<span class="filter-count"></span></span></button>
-      <button class="filter-btn" data-filter="webflow" style="--cat-color: var(--c-webflow);"><span class="pill"><svg class="icon filter-icon"><use href="#icon-flow"/></svg>Webflow<span class="filter-count"></span></span></button>
-      <button class="filter-btn" data-filter="ghl" style="--cat-color: var(--gold-dark);"><span class="pill"><svg class="icon filter-icon"><use href="#icon-funnel"/></svg>Go High Level<span class="filter-count"></span></span></button>
-    </div>
-
-    <p class="results-count" id="results-count"></p>
-
-    <div class="ticket-grid" id="portfolio-grid">
-      <a class="ticket-card" data-cat="fullstack" style="--cat-color: var(--c-fullstack);" href="https://platformvoeding.nl/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-layers"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Full-Stack</span><h3>Platform Voeding</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="fullstack" style="--cat-color: var(--c-fullstack);" href="https://www.districenter.fr/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-layers"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Full-Stack</span><h3>DistriCenter</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="fullstack" style="--cat-color: var(--c-fullstack);" href="https://jobs.atelierdeschefs.fr/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-layers"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Full-Stack</span><h3>L'atelier des Chefs</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://thehungryfamily.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>The Hungry Family</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://zelfbewustekinderen.nl/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>Zelfbewuste Kinderen</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://connaughtcare.co.uk/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>Connaught Care Collection</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://www.nuovopasta.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>Nuovo Pasta</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://www.boldstreet.ai/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>Bold Street AI</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://unitedtalent.be/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>United Talent</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://girliegetawayireland.ie/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>Girlie Getaway Ireland</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://momdernemer.be/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>Momdernemer</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://clearpathpropertysolutions.us/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>Clear Path Property Solutions</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wordpress" style="--cat-color: var(--c-wordpress);" href="https://schuhjunkremoval.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-book"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WordPress</span><h3>Schuh Junk Removal</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-
-      <a class="ticket-card" data-cat="woocommerce" style="--cat-color: var(--c-woocommerce);" href="https://ebdicorp.com.br/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-cart"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WooCommerce</span><h3>ebdi</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="woocommerce" style="--cat-color: var(--c-woocommerce);" href="https://veramar.gt/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-cart"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WooCommerce</span><h3>Veramar by Sara Guerrero</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="woocommerce" style="--cat-color: var(--c-woocommerce);" href="https://www.studiohollond.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-cart"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">WooCommerce</span><h3>Studio Hollond</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-
-      <a class="ticket-card" data-cat="shopify" style="--cat-color: var(--c-shopify);" href="https://sinnersattire.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-bag"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Shopify</span><h3>Sinners Attire</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="shopify" style="--cat-color: var(--c-shopify);" href="https://ghospell.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-bag"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Shopify</span><h3>Ghospell.com</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="shopify" style="--cat-color: var(--c-shopify);" href="https://stage4tuning.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-bag"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Shopify</span><h3>Stage 4 Tuning</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="shopify" style="--cat-color: var(--c-shopify);" href="https://mrtools.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-bag"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Shopify</span><h3>Mr. Tools</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="shopify" style="--cat-color: var(--c-shopify);" href="https://www.pagerie.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-bag"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Shopify</span><h3>Pagerie</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="shopify" style="--cat-color: var(--c-shopify);" href="https://mckenziesmidtown.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-bag"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Shopify</span><h3>Mckenzie's Midtown Tavern</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="shopify" style="--cat-color: var(--c-shopify);" href="https://definemedigital.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-bag"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Shopify</span><h3>DefineMe</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="shopify" style="--cat-color: var(--c-shopify);" href="https://lifeamore.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-bag"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Shopify</span><h3>LifeAmore</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-
-      <a class="ticket-card" data-cat="phpjs" style="--cat-color: var(--c-phpjs);" href="https://www.coffeeaddress.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-code"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">PHP/JS · React</span><h3>Coffee Address</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="phpjs" style="--cat-color: var(--c-phpjs);" href="https://evermoreinlove.org/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-code"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">PHP/JS · React</span><h3>EverMore In Love</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="phpjs" style="--cat-color: var(--c-phpjs);" href="https://www.luluandisabelle.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-code"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">PHP/JS · React</span><h3>Lulu and Isabelle Studio</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="phpjs" style="--cat-color: var(--c-phpjs);" href="https://caprocat.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-code"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">PHP/JS · React</span><h3>Cap Rocat</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-
-      <a class="ticket-card" data-cat="wix" style="--cat-color: var(--c-wix);" href="https://www.yoga-moon.com/en" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-puzzle"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Wix</span><h3>Yoga Moon</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wix" style="--cat-color: var(--c-wix);" href="https://www.landycampers.co.uk/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-puzzle"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Wix</span><h3>LandyCampers</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wix" style="--cat-color: var(--c-wix);" href="https://www.dhi-scotland.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-puzzle"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Wix</span><h3>DHI Scotland</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="wix" style="--cat-color: var(--c-wix);" href="https://www.getsomewine.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-puzzle"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Wix</span><h3>GetSomeWine</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-
-      <a class="ticket-card" data-cat="webflow" style="--cat-color: var(--c-webflow);" href="https://www.greatdwellings.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-flow"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Webflow</span><h3>Great Dwellings</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="webflow" style="--cat-color: var(--c-webflow);" href="https://www.le-mont.ca/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-flow"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Webflow</span><h3>le-mont.ca</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
-
-      <a class="ticket-card" data-cat="ghl" style="--cat-color: var(--gold-dark);" href="https://start.draftitdigital.com/landing-page-page-7302" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-funnel"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Go High Level</span><h3>Draft It Digital · Landing Page</h3><span class="ticket-link">View page ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="ghl" style="--cat-color: var(--gold-dark);" href="https://start.draftitdigital.com/thank-you-page-page-7479" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-funnel"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Go High Level</span><h3>Draft It Digital · Thank You Page</h3><span class="ticket-link">View page ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="ghl" style="--cat-color: var(--gold-dark);" href="https://app.gohighlevel.com/v2/preview/BCX2h0nJ5kZwlBs8a6Zi?notrack=true" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-funnel"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Go High Level</span><h3>Landing Page Funnel Preview</h3><span class="ticket-link">View funnel ↗</span></div>
-      </a>
-      <a class="ticket-card" data-cat="ghl" style="--cat-color: var(--gold-dark);" href="https://alphaleadacademy.com/" target="_blank" rel="noopener">
-        <svg class="icon ticket-icon"><use href="#icon-funnel"/></svg>
-        <div class="ticket-body"><span class="ticket-tag">Go High Level</span><h3>Alpha Lead Academy</h3><span class="ticket-link">Visit site ↗</span></div>
-      </a>
+    <p class="shelf-hint" data-animate><span class="hint-hover">Hover a book to peek at its address, then click to open the live site.</span><span class="hint-tap">Tap any book to open the live site.</span><span class="hint-slide"> Slide each shelf sideways to see every book.</span></p>
+    <div class="bookcase" data-animate>
+      <div class="bookcase-crown" aria-hidden="true"><span>✦ The Spellbook Shelves ✦</span></div>
+      <div class="bookcase-inner">
+        <div class="shelf-tier">
+          <div class="shelf" data-cat="wordpress" style="--n:10;">
+            <p class="shelf-plaque"><span>I</span> WordPress <em>10</em></p>
+            <div class="shelf-row">
+              <a class="book v1" href="https://thehungryfamily.com/" target="_blank" rel="noopener" style="--h:218px; --w:52px; --g:1.05;">
+                <span class="book-title">The Hungry Family</span>
+                <span class="book-mono" aria-hidden="true">HF</span>
+                <span class="book-tag" aria-hidden="true">thehungryfamily.com ↗</span>
+              </a>
+              <a class="book v2" href="https://zelfbewustekinderen.nl/" target="_blank" rel="noopener" style="--h:230px; --w:46px; --g:0.9;">
+                <span class="book-title">Zelfbewuste Kinderen</span>
+                <span class="book-mono" aria-hidden="true">ZK</span>
+                <span class="book-tag" aria-hidden="true">zelfbewustekinderen.nl ↗</span>
+              </a>
+              <a class="book v3 long" href="https://connaughtcare.co.uk/" target="_blank" rel="noopener" style="--h:250px; --w:58px; --g:1.15;">
+                <span class="book-title">Connaught Care Collection</span>
+                <span class="book-mono" aria-hidden="true">CC</span>
+                <span class="book-tag" aria-hidden="true">connaughtcare.co.uk ↗</span>
+              </a>
+              <a class="book v1" href="https://www.nuovopasta.com/" target="_blank" rel="noopener" style="--h:194px; --w:50px; --g:1;">
+                <span class="book-title">Nuovo Pasta</span>
+                <span class="book-mono" aria-hidden="true">NP</span>
+                <span class="book-tag" aria-hidden="true">nuovopasta.com ↗</span>
+              </a>
+              <a class="book v2" href="https://www.boldstreet.ai/" target="_blank" rel="noopener" style="--h:206px; --w:52px; --g:1.05;">
+                <span class="book-title">Bold Street AI</span>
+                <span class="book-mono" aria-hidden="true">BS</span>
+                <span class="book-tag" aria-hidden="true">boldstreet.ai ↗</span>
+              </a>
+              <a class="book v3" href="https://unitedtalent.be/" target="_blank" rel="noopener" style="--h:202px; --w:46px; --g:0.9;">
+                <span class="book-title">United Talent</span>
+                <span class="book-mono" aria-hidden="true">UT</span>
+                <span class="book-tag" aria-hidden="true">unitedtalent.be ↗</span>
+              </a>
+              <a class="book v1" href="https://girliegetawayireland.ie/" target="_blank" rel="noopener" style="--h:238px; --w:58px; --g:1.15;">
+                <span class="book-title">Girlie Getaway Ireland</span>
+                <span class="book-mono" aria-hidden="true">GG</span>
+                <span class="book-tag" aria-hidden="true">girliegetawayireland.ie ↗</span>
+              </a>
+              <a class="book v2" href="https://momdernemer.be/" target="_blank" rel="noopener" style="--h:194px; --w:50px; --g:1;">
+                <span class="book-title">Momdernemer</span>
+                <span class="book-mono" aria-hidden="true">Mo</span>
+                <span class="book-tag" aria-hidden="true">momdernemer.be ↗</span>
+              </a>
+              <a class="book v3 long" href="https://clearpathpropertysolutions.us/" target="_blank" rel="noopener" style="--h:250px; --w:52px; --g:1.05;">
+                <span class="book-title">Clear Path Property Solutions</span>
+                <span class="book-mono" aria-hidden="true">CP</span>
+                <span class="book-tag" aria-hidden="true">clearpathpropertysolutions.us ↗</span>
+              </a>
+              <a class="book v1" href="https://schuhjunkremoval.com/" target="_blank" rel="noopener" style="--h:222px; --w:46px; --g:0.9;">
+                <span class="book-title">Schuh Junk Removal</span>
+                <span class="book-mono" aria-hidden="true">SJ</span>
+                <span class="book-tag" aria-hidden="true">schuhjunkremoval.com ↗</span>
+              </a>
+            </div>
+            <div class="shelf-plank" aria-hidden="true"></div>
+          </div>
+          <div class="shelf" data-cat="woocommerce" style="--n:3;">
+            <p class="shelf-plaque"><span>II</span> WooCommerce <em>3</em></p>
+            <div class="shelf-row">
+              <a class="book v1" href="https://ebdicorp.com.br/" target="_blank" rel="noopener" style="--h:166px; --w:52px; --g:1.05;">
+                <span class="book-title">ebdi</span>
+                <span class="book-mono" aria-hidden="true">Eb</span>
+                <span class="book-tag" aria-hidden="true">ebdicorp.com.br ↗</span>
+              </a>
+              <a class="book v2" href="https://veramar.gt/" target="_blank" rel="noopener" style="--h:246px; --w:46px; --g:0.9;">
+                <span class="book-title">Veramar by Sara Guerrero</span>
+                <span class="book-mono" aria-hidden="true">VS</span>
+                <span class="book-tag" aria-hidden="true">veramar.gt ↗</span>
+              </a>
+              <a class="book v3" href="https://www.studiohollond.com/" target="_blank" rel="noopener" style="--h:206px; --w:58px; --g:1.15;">
+                <span class="book-title">Studio Hollond</span>
+                <span class="book-mono" aria-hidden="true">SH</span>
+                <span class="book-tag" aria-hidden="true">studiohollond.com ↗</span>
+              </a>
+            </div>
+            <div class="shelf-plank" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="shelf-tier">
+          <div class="shelf" data-cat="shopify" style="--n:8;">
+            <p class="shelf-plaque"><span>III</span> Shopify <em>8</em></p>
+            <div class="shelf-row">
+              <a class="book v1" href="https://sinnersattire.com/" target="_blank" rel="noopener" style="--h:206px; --w:52px; --g:1.05;">
+                <span class="book-title">Sinners Attire</span>
+                <span class="book-mono" aria-hidden="true">SA</span>
+                <span class="book-tag" aria-hidden="true">sinnersattire.com ↗</span>
+              </a>
+              <a class="book v2" href="https://ghospell.com/" target="_blank" rel="noopener" style="--h:198px; --w:46px; --g:0.9;">
+                <span class="book-title">Ghospell.com</span>
+                <span class="book-mono" aria-hidden="true">Gh</span>
+                <span class="book-tag" aria-hidden="true">ghospell.com ↗</span>
+              </a>
+              <a class="book v3" href="https://stage4tuning.com/" target="_blank" rel="noopener" style="--h:206px; --w:58px; --g:1.15;">
+                <span class="book-title">Stage 4 Tuning</span>
+                <span class="book-mono" aria-hidden="true">ST</span>
+                <span class="book-tag" aria-hidden="true">stage4tuning.com ↗</span>
+              </a>
+              <a class="book v1" href="https://mrtools.com/" target="_blank" rel="noopener" style="--h:186px; --w:50px; --g:1;">
+                <span class="book-title">Mr. Tools</span>
+                <span class="book-mono" aria-hidden="true">MT</span>
+                <span class="book-tag" aria-hidden="true">mrtools.com ↗</span>
+              </a>
+              <a class="book v2" href="https://www.pagerie.com/" target="_blank" rel="noopener" style="--h:178px; --w:52px; --g:1.05;">
+                <span class="book-title">Pagerie</span>
+                <span class="book-mono" aria-hidden="true">Pa</span>
+                <span class="book-tag" aria-hidden="true">pagerie.com ↗</span>
+              </a>
+              <a class="book v3 long" href="https://mckenziesmidtown.com/" target="_blank" rel="noopener" style="--h:250px; --w:46px; --g:0.9;">
+                <span class="book-title">Mckenzie's Midtown Tavern</span>
+                <span class="book-mono" aria-hidden="true">MM</span>
+                <span class="book-tag" aria-hidden="true">mckenziesmidtown.com ↗</span>
+              </a>
+              <a class="book v1" href="https://definemedigital.com/" target="_blank" rel="noopener" style="--h:182px; --w:58px; --g:1.15;">
+                <span class="book-title">DefineMe</span>
+                <span class="book-mono" aria-hidden="true">DM</span>
+                <span class="book-tag" aria-hidden="true">definemedigital.com ↗</span>
+              </a>
+              <a class="book v2" href="https://lifeamore.com/" target="_blank" rel="noopener" style="--h:186px; --w:50px; --g:1;">
+                <span class="book-title">LifeAmore</span>
+                <span class="book-mono" aria-hidden="true">LA</span>
+                <span class="book-tag" aria-hidden="true">lifeamore.com ↗</span>
+              </a>
+            </div>
+            <div class="shelf-plank" aria-hidden="true"></div>
+          </div>
+          <div class="shelf" data-cat="fullstack" style="--n:3;">
+            <p class="shelf-plaque"><span>IV</span> Full Stack <em>3</em></p>
+            <div class="shelf-row">
+              <a class="book v1" href="https://platformvoeding.nl/" target="_blank" rel="noopener" style="--h:214px; --w:52px; --g:1.05;">
+                <span class="book-title">Platform Voeding</span>
+                <span class="book-mono" aria-hidden="true">PV</span>
+                <span class="book-tag" aria-hidden="true">platformvoeding.nl ↗</span>
+              </a>
+              <a class="book v2" href="https://www.districenter.fr/" target="_blank" rel="noopener" style="--h:198px; --w:46px; --g:0.9;">
+                <span class="book-title">DistriCenter</span>
+                <span class="book-mono" aria-hidden="true">DC</span>
+                <span class="book-tag" aria-hidden="true">districenter.fr ↗</span>
+              </a>
+              <a class="book v3" href="https://jobs.atelierdeschefs.fr/" target="_blank" rel="noopener" style="--h:226px; --w:58px; --g:1.15;">
+                <span class="book-title">L'atelier des Chefs</span>
+                <span class="book-mono" aria-hidden="true">LA</span>
+                <span class="book-tag" aria-hidden="true">jobs.atelierdeschefs.fr ↗</span>
+              </a>
+            </div>
+            <div class="shelf-plank" aria-hidden="true"></div>
+          </div>
+          <div class="shelf" data-cat="webflow" style="--n:2;">
+            <p class="shelf-plaque"><span>V</span> Webflow <em>2</em></p>
+            <div class="shelf-row">
+              <a class="book v1" href="https://www.greatdwellings.com/" target="_blank" rel="noopener" style="--h:210px; --w:52px; --g:1.05;">
+                <span class="book-title">Great Dwellings</span>
+                <span class="book-mono" aria-hidden="true">GD</span>
+                <span class="book-tag" aria-hidden="true">greatdwellings.com ↗</span>
+              </a>
+              <a class="book v2" href="https://www.le-mont.ca/" target="_blank" rel="noopener" style="--h:190px; --w:46px; --g:0.9;">
+                <span class="book-title">le-mont.ca</span>
+                <span class="book-mono" aria-hidden="true">LM</span>
+                <span class="book-tag" aria-hidden="true">le-mont.ca ↗</span>
+              </a>
+            </div>
+            <div class="shelf-plank" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="shelf-tier">
+          <div class="shelf" data-cat="phpjs" style="--n:4;">
+            <p class="shelf-plaque"><span>VI</span> PHP/JS &amp; React <em>4</em></p>
+            <div class="shelf-row">
+              <a class="book v1" href="https://www.coffeeaddress.com/" target="_blank" rel="noopener" style="--h:206px; --w:52px; --g:1.05;">
+                <span class="book-title">Coffee Address</span>
+                <span class="book-mono" aria-hidden="true">CA</span>
+                <span class="book-tag" aria-hidden="true">coffeeaddress.com ↗</span>
+              </a>
+              <a class="book v2" href="https://evermoreinlove.org/" target="_blank" rel="noopener" style="--h:214px; --w:46px; --g:0.9;">
+                <span class="book-title">EverMore In Love</span>
+                <span class="book-mono" aria-hidden="true">EM</span>
+                <span class="book-tag" aria-hidden="true">evermoreinlove.org ↗</span>
+              </a>
+              <a class="book v3" href="https://www.luluandisabelle.com/" target="_blank" rel="noopener" style="--h:246px; --w:58px; --g:1.15;">
+                <span class="book-title">Lulu and Isabelle Studio</span>
+                <span class="book-mono" aria-hidden="true">LI</span>
+                <span class="book-tag" aria-hidden="true">luluandisabelle.com ↗</span>
+              </a>
+              <a class="book v1" href="https://caprocat.com/" target="_blank" rel="noopener" style="--h:186px; --w:50px; --g:1;">
+                <span class="book-title">Cap Rocat</span>
+                <span class="book-mono" aria-hidden="true">CR</span>
+                <span class="book-tag" aria-hidden="true">caprocat.com ↗</span>
+              </a>
+            </div>
+            <div class="shelf-plank" aria-hidden="true"></div>
+          </div>
+          <div class="shelf" data-cat="wix" style="--n:4;">
+            <p class="shelf-plaque"><span>VII</span> Wix <em>4</em></p>
+            <div class="shelf-row">
+              <a class="book v1" href="https://www.yoga-moon.com/en" target="_blank" rel="noopener" style="--h:186px; --w:52px; --g:1.05;">
+                <span class="book-title">Yoga Moon</span>
+                <span class="book-mono" aria-hidden="true">YM</span>
+                <span class="book-tag" aria-hidden="true">yoga-moon.com ↗</span>
+              </a>
+              <a class="book v2" href="https://www.landycampers.co.uk/" target="_blank" rel="noopener" style="--h:198px; --w:46px; --g:0.9;">
+                <span class="book-title">LandyCampers</span>
+                <span class="book-mono" aria-hidden="true">LC</span>
+                <span class="book-tag" aria-hidden="true">landycampers.co.uk ↗</span>
+              </a>
+              <a class="book v3" href="https://www.dhi-scotland.com/" target="_blank" rel="noopener" style="--h:198px; --w:58px; --g:1.15;">
+                <span class="book-title">DHI Scotland</span>
+                <span class="book-mono" aria-hidden="true">DS</span>
+                <span class="book-tag" aria-hidden="true">dhi-scotland.com ↗</span>
+              </a>
+              <a class="book v1" href="https://www.getsomewine.com/" target="_blank" rel="noopener" style="--h:194px; --w:50px; --g:1;">
+                <span class="book-title">GetSomeWine</span>
+                <span class="book-mono" aria-hidden="true">GS</span>
+                <span class="book-tag" aria-hidden="true">getsomewine.com ↗</span>
+              </a>
+            </div>
+            <div class="shelf-plank" aria-hidden="true"></div>
+          </div>
+          <div class="shelf" data-cat="ghl" style="--n:4;">
+            <p class="shelf-plaque"><span>VIII</span> Go High Level <em>4</em></p>
+            <div class="shelf-row">
+              <a class="book v1 long" href="https://start.draftitdigital.com/landing-page-page-7302" target="_blank" rel="noopener" style="--h:250px; --w:52px; --g:1.05;">
+                <span class="book-title">Draft It Digital · Landing Page</span>
+                <span class="book-mono" aria-hidden="true">DI</span>
+                <span class="book-tag" aria-hidden="true">start.draftitdigital.com ↗</span>
+              </a>
+              <a class="book v2 long" href="https://start.draftitdigital.com/thank-you-page-page-7479" target="_blank" rel="noopener" style="--h:250px; --w:46px; --g:0.9;">
+                <span class="book-title">Draft It Digital · Thank You Page</span>
+                <span class="book-mono" aria-hidden="true">DI</span>
+                <span class="book-tag" aria-hidden="true">start.draftitdigital.com ↗</span>
+              </a>
+              <a class="book v3 long" href="https://app.gohighlevel.com/v2/preview/BCX2h0nJ5kZwlBs8a6Zi?notrack=true" target="_blank" rel="noopener" style="--h:250px; --w:58px; --g:1.15;">
+                <span class="book-title">Landing Page Funnel Preview</span>
+                <span class="book-mono" aria-hidden="true">LP</span>
+                <span class="book-tag" aria-hidden="true">app.gohighlevel.com ↗</span>
+              </a>
+              <a class="book v1" href="https://alphaleadacademy.com/" target="_blank" rel="noopener" style="--h:222px; --w:50px; --g:1;">
+                <span class="book-title">Alpha Lead Academy</span>
+                <span class="book-mono" aria-hidden="true">AL</span>
+                <span class="book-tag" aria-hidden="true">alphaleadacademy.com ↗</span>
+              </a>
+            </div>
+            <div class="shelf-plank" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="process-cta">
@@ -255,12 +324,57 @@
 
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
+<footer class="site-footer" id="site-footer">
+  <div class="footer-sky" aria-hidden="true">
+    <span class="footer-moon"></span>
+    <div class="footer-stars" id="footer-stars"></div>
+  </div>
+
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">Maya Kalen</a>
+      <p class="footer-role">Web Developer &amp; Designer</p>
+      <p class="footer-blurb">Websites that feel a little like magic, built by hand, one spell at a time.</p>
+      <div class="footer-chips">
+        <a href="mailto:kalen.mayaa@gmail.com" class="footer-chip"><span aria-hidden="true">✉️</span> kalen.mayaa@gmail.com</a>
+        <a href="https://www.instagram.com/web.developer_mayaa/" class="footer-chip" target="_blank" rel="noopener"><span aria-hidden="true">📸</span> @web.developer_mayaa</a>
+      </div>
+    </div>
+
+    <nav class="footer-map" aria-label="Footer">
+      <p class="footer-heading">Wander the Map</p>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="toolkit.html">Toolkit</a></li>
+        <li><a href="process.html">Process</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-wish">
+      <p class="footer-heading">Catch a Falling Star</p>
+      <p class="footer-wish-text">Tap below and the night sky will read your fortune.</p>
+      <button type="button" class="star-catch-btn sparkle-host" id="star-catch">
+        <span class="star-catch-icon" aria-hidden="true">🌠</span> Read my stars
+      </button>
+      <p class="footer-fortune" id="footer-fortune" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="container footer-signoff">
+    <p class="footer-script">Until the next spell <span aria-hidden="true">✦</span></p>
+  </div>
+
+  <div class="container footer-bottom">
     <p>&copy; <span id="year"></span> Maya Kalen. All rights reserved.</p>
-    <a href="#top" class="back-to-top">Back to top ↑</a>
+    <p class="footer-craft">Hand-coded with care and a sprinkle of stardust.</p>
+    <a href="#top" class="back-to-top" id="back-to-top">Fly back up <span class="broom" aria-hidden="true">🧹</span></a>
   </div>
 </footer>
+
 
 <a href="mailto:kalen.mayaa@gmail.com" class="email-fab" id="email-fab" aria-label="Email Maya Kalen">
   <span aria-hidden="true">✉️</span>

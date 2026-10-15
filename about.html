@@ -264,12 +264,57 @@
 </main>
 
 <!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-  <div class="container footer-inner">
+<footer class="site-footer" id="site-footer">
+  <div class="footer-sky" aria-hidden="true">
+    <span class="footer-moon"></span>
+    <div class="footer-stars" id="footer-stars"></div>
+  </div>
+
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">Maya Kalen</a>
+      <p class="footer-role">Web Developer &amp; Designer</p>
+      <p class="footer-blurb">Websites that feel a little like magic, built by hand, one spell at a time.</p>
+      <div class="footer-chips">
+        <a href="mailto:kalen.mayaa@gmail.com" class="footer-chip"><span aria-hidden="true">✉️</span> kalen.mayaa@gmail.com</a>
+        <a href="https://www.instagram.com/web.developer_mayaa/" class="footer-chip" target="_blank" rel="noopener"><span aria-hidden="true">📸</span> @web.developer_mayaa</a>
+      </div>
+    </div>
+
+    <nav class="footer-map" aria-label="Footer">
+      <p class="footer-heading">Wander the Map</p>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="toolkit.html">Toolkit</a></li>
+        <li><a href="process.html">Process</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-wish">
+      <p class="footer-heading">Catch a Falling Star</p>
+      <p class="footer-wish-text">Tap below and the night sky will read your fortune.</p>
+      <button type="button" class="star-catch-btn sparkle-host" id="star-catch">
+        <span class="star-catch-icon" aria-hidden="true">🌠</span> Read my stars
+      </button>
+      <p class="footer-fortune" id="footer-fortune" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="container footer-signoff">
+    <p class="footer-script">Until the next spell <span aria-hidden="true">✦</span></p>
+  </div>
+
+  <div class="container footer-bottom">
     <p>&copy; <span id="year"></span> Maya Kalen. All rights reserved.</p>
-    <a href="#top" class="back-to-top">Back to top &uarr;</a>
+    <p class="footer-craft">Hand-coded with care and a sprinkle of stardust.</p>
+    <a href="#top" class="back-to-top" id="back-to-top">Fly back up <span class="broom" aria-hidden="true">🧹</span></a>
   </div>
 </footer>
+
 
 <a href="mailto:kalen.mayaa@gmail.com" class="email-fab" id="email-fab" aria-label="Email Maya Kalen">
   <span aria-hidden="true">✉️</span>

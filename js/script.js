@@ -69,56 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
     animatedEls.forEach((el) => el.classList.add('in-view'));
   }
 
-  // ---- Portfolio filtering ----
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const portfolioCards = document.querySelectorAll('.ticket-card');
-  const resultsCount = document.getElementById('results-count');
+  // ---- Portfolio bookcase: hero stats always match the real shelves ----
+  const shelfBooks = document.querySelectorAll('.bookcase .book');
+  if (shelfBooks.length) {
+    const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+    setText('project-total', shelfBooks.length);
+    setText('platform-total', document.querySelectorAll('.bookcase .shelf').length);
+  }
 
-  const counts = { all: portfolioCards.length };
-  portfolioCards.forEach((card) => {
-    const cat = card.dataset.cat;
-    counts[cat] = (counts[cat] || 0) + 1;
-  });
-  filterButtons.forEach((btn) => {
-    const countEl = btn.querySelector('.filter-count');
-    if (countEl) countEl.textContent = counts[btn.dataset.filter] || 0;
-  });
 
-  const updateResultsCount = (visible) => {
-    if (!resultsCount) return;
-    resultsCount.textContent = `Showing ${visible} project${visible === 1 ? '' : 's'}`;
-  };
-
-  const applyFilter = (filter) => {
-    let visibleIndex = 0;
-
-    portfolioCards.forEach((card) => {
-      const match = filter === 'all' || card.dataset.cat === filter;
-
-      if (match) {
-        card.classList.remove('hidden');
-        card.style.animationDelay = `${visibleIndex * 30}ms`;
-        card.classList.remove('pop');
-        void card.offsetWidth;
-        card.classList.add('pop');
-        visibleIndex += 1;
-      } else {
-        card.classList.add('hidden');
-      }
-    });
-
-    updateResultsCount(visibleIndex);
-  };
-
-  filterButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      applyFilter(btn.dataset.filter);
-    });
-  });
-
-  applyFilter('all');
 
   // ---- Toolkit: click the cabinet doors to swing them open ----
   const cabinet = document.getElementById('cabinet');
@@ -146,10 +105,135 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!head) return;
     head.addEventListener('click', () => {
       const willOpen = !item.classList.contains('open');
-      accordionItems.forEach((other) => other.classList.remove('open'));
-      if (willOpen) item.classList.add('open');
+      accordionItems.forEach((other) => {
+        other.classList.remove('open');
+        other.querySelector('.accordion-head')?.setAttribute('aria-expanded', 'false');
+      });
+      if (willOpen) {
+        item.classList.add('open');
+        head.setAttribute('aria-expanded', 'true');
+      }
     });
   });
+
+  // ---- Toolkit cauldron: tap ingredients to drop them in, then email the recipe ----
+  const cauldron = document.getElementById('cauldron');
+  const toolChips = document.querySelectorAll('.accordion button.chip');
+
+  if (cauldron && toolChips.length) {
+    const pot = document.getElementById('cauldron-pot');
+    const picksList = document.getElementById('cauldron-picks');
+    const sendLink = document.getElementById('cauldron-send');
+    const clearBtn = document.getElementById('cauldron-clear');
+    const hint = document.getElementById('cauldron-hint');
+    const defaultHint = hint ? hint.textContent : '';
+    const picks = new Set();
+    const MAX_PICKS = 12;
+
+    const ingredientCount = document.getElementById('ingredient-count');
+    const shelfCount = document.getElementById('shelf-count');
+    if (ingredientCount) ingredientCount.textContent = toolChips.length;
+    if (shelfCount) shelfCount.textContent = document.querySelectorAll('.accordion-item').length;
+
+    toolChips.forEach((chip) => chip.setAttribute('aria-pressed', 'false'));
+
+    const cauldronToast = (text) => {
+      if (!toast) return;
+      const rect = cauldron.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) return;
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(cauldronToast.timer);
+      cauldronToast.timer = setTimeout(() => toast.classList.remove('show'), 1600);
+    };
+
+    const render = () => {
+      picksList.innerHTML = '';
+      picks.forEach((name) => {
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', `Remove ${name} from the cauldron`);
+        btn.innerHTML = '<span aria-hidden="true">×</span>';
+        btn.prepend(document.createTextNode(name));
+        btn.addEventListener('click', () => toggle(name));
+        li.appendChild(btn);
+        picksList.appendChild(li);
+      });
+
+      const count = picks.size;
+      cauldron.classList.toggle('has-picks', count > 0);
+      pot?.style.setProperty('--fill', Math.min(count, 8));
+      clearBtn.hidden = count === 0;
+      sendLink.setAttribute('aria-disabled', count === 0 ? 'true' : 'false');
+      if (hint) {
+        hint.textContent = count === 0
+          ? defaultHint
+          : `${count} ingredient${count === 1 ? '' : 's'} bubbling. Add more, or send the recipe my way.`;
+      }
+
+      const list = [...picks].map((name) => `- ${name}`).join('\n');
+      const subject = 'A project brewed on your Toolkit page';
+      const body = `Hi Maya,\n\nI would love to brew a project with these ingredients:\n${list}\n\nHere is a little about what I have in mind:\n\n`;
+      sendLink.href = `mailto:kalen.mayaa@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      toolChips.forEach((chip) => chip.setAttribute('aria-pressed', picks.has(chip.textContent.trim()) ? 'true' : 'false'));
+    };
+
+    const toggle = (name, sourceEl) => {
+      if (picks.has(name)) {
+        picks.delete(name);
+      } else {
+        if (picks.size >= MAX_PICKS) {
+          cauldronToast('The cauldron is full! Send this brew first.');
+          return;
+        }
+        picks.add(name);
+        if (pot && !prefersReducedMotion) {
+          pot.classList.remove('splash');
+          void pot.offsetWidth;
+          pot.classList.add('splash');
+        }
+        if (sourceEl) spawnCardSparkle(sourceEl.closest('.accordion-body') || cauldron, 3);
+        cauldronToast(`🧪 ${name} added to your cauldron`);
+      }
+      render();
+    };
+
+    toolChips.forEach((chip) => {
+      chip.addEventListener('click', () => toggle(chip.textContent.trim(), chip));
+    });
+    clearBtn.addEventListener('click', () => { picks.clear(); render(); });
+    render();
+  }
+
+  // ---- Services: the pretend AI answer types itself out when it scrolls into view ----
+  const answerTyped = document.getElementById('answer-typed');
+  if (answerTyped) {
+    const fullText = answerTyped.dataset.text || '';
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      answerTyped.textContent = fullText;
+    } else {
+      let typingTimer = null;
+      const typeAnswer = () => {
+        clearInterval(typingTimer);
+        let i = 0;
+        answerTyped.textContent = '';
+        typingTimer = setInterval(() => {
+          i += 1;
+          answerTyped.textContent = fullText.slice(0, i);
+          if (i >= fullText.length) clearInterval(typingTimer);
+        }, 28);
+      };
+      new IntersectionObserver((entries, obs) => {
+        if (entries[0].isIntersecting) { typeAnswer(); obs.disconnect(); }
+      }, { threshold: 0.6 }).observe(answerTyped.closest('.answer-demo'));
+      answerTyped.closest('.spotlight-card')?.addEventListener('mouseenter', () => {
+        if (answerTyped.textContent.length === fullText.length) typeAnswer();
+      });
+    }
+  }
 
   // ---- Scroll parallax for the floating shapes & blobs ----
   const parallaxLayers = [
@@ -183,18 +267,22 @@ document.addEventListener('DOMContentLoaded', () => {
     updateParallax();
   }
 
-  // ---- Floating "Email Me" button: hide once the real Contact card is on screen ----
+  // ---- Floating "Email Me" button: hide once the real Contact card, or the
+  // footer (which has its own email link), is on screen ----
   const emailFab = document.getElementById('email-fab');
-  const contactSection = document.getElementById('contact');
+  const fabTargets = [document.getElementById('contact'), document.getElementById('site-footer')].filter(Boolean);
 
-  if (emailFab && contactSection && 'IntersectionObserver' in window) {
+  if (emailFab && fabTargets.length && 'IntersectionObserver' in window) {
+    const visibleTargets = new Set();
     const fabObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        emailFab.classList.toggle('is-hidden', entry.isIntersecting);
+        if (entry.isIntersecting) visibleTargets.add(entry.target);
+        else visibleTargets.delete(entry.target);
       });
+      emailFab.classList.toggle('is-hidden', visibleTargets.size > 0);
     }, { threshold: 0.25 });
 
-    fabObserver.observe(contactSection);
+    fabTargets.forEach((target) => fabObserver.observe(target));
   }
 
   // ---- Shared sparkle helpers ----
@@ -255,6 +343,89 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { cooldown = false; }, 500);
       });
     });
+  }
+
+  // ---- Footer night sky: twinkling stars, shooting stars, fortunes ----
+  const footer = document.getElementById('site-footer');
+  const footerStars = document.getElementById('footer-stars');
+
+  if (footer && footerStars) {
+    for (let i = 0; i < 48; i += 1) {
+      const star = document.createElement('span');
+      star.className = Math.random() < 0.25 ? 'footer-star glint' : 'footer-star';
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${4 + Math.random() * 90}%`;
+      star.style.setProperty('--s', `${1.5 + Math.random() * 2.5}px`);
+      star.style.setProperty('--d', `${2.2 + Math.random() * 3}s`);
+      star.style.setProperty('--delay', `${Math.random() * -5}s`);
+      footerStars.appendChild(star);
+    }
+
+    const shootStar = () => {
+      if (prefersReducedMotion) return;
+      const streak = document.createElement('span');
+      streak.className = 'shooting-star';
+      const angle = 14 + Math.random() * 22;
+      const distance = 260 + Math.random() * 220;
+      const rad = (angle * Math.PI) / 180;
+      streak.style.left = `${Math.random() * 65}%`;
+      streak.style.top = `${4 + Math.random() * 35}%`;
+      streak.style.setProperty('--angle', `${angle}deg`);
+      streak.style.setProperty('--tx', `${(Math.cos(rad) * distance).toFixed(0)}px`);
+      streak.style.setProperty('--ty', `${(Math.sin(rad) * distance).toFixed(0)}px`);
+      streak.style.setProperty('--dur', `${0.9 + Math.random() * 0.5}s`);
+      footerStars.appendChild(streak);
+      setTimeout(() => streak.remove(), 1600);
+    };
+
+    // an occasional ambient streak, only while the footer is on screen
+    let skyTimer = null;
+    const scheduleStreak = () => {
+      skyTimer = setTimeout(() => { shootStar(); scheduleStreak(); }, 5000 + Math.random() * 5000);
+    };
+    new IntersectionObserver(([entry]) => {
+      clearTimeout(skyTimer);
+      if (entry.isIntersecting) scheduleStreak();
+    }).observe(footer);
+
+    const FORTUNES = [
+      'A website you love is closer than you think.',
+      'The stars say your next launch goes smoothly.',
+      'Wish granted: fewer plugins, faster pages.',
+      'Your brand is about to have a glow up.',
+      'Somewhere, a perfectly aligned div awaits you.',
+      'Today is a very good day to hit publish.',
+      'The cosmos approves of your color palette.',
+      'Great things are loading. Please stand by.',
+    ];
+    const starCatch = document.getElementById('star-catch');
+    const fortuneEl = document.getElementById('footer-fortune');
+    let lastFortune = -1;
+
+    if (starCatch && fortuneEl) {
+      starCatch.addEventListener('click', () => {
+        let pick;
+        do { pick = Math.floor(Math.random() * FORTUNES.length); } while (pick === lastFortune);
+        lastFortune = pick;
+        fortuneEl.classList.remove('show');
+        shootStar();
+        spawnCardSparkle(starCatch, 6);
+        setTimeout(() => {
+          fortuneEl.textContent = FORTUNES[pick];
+          fortuneEl.classList.add('show');
+        }, prefersReducedMotion ? 0 : 450);
+      });
+    }
+
+    const backToTop = document.getElementById('back-to-top');
+    if (backToTop && !prefersReducedMotion) {
+      backToTop.addEventListener('click', () => {
+        backToTop.classList.remove('flying');
+        void backToTop.offsetWidth;
+        backToTop.classList.add('flying');
+        setTimeout(() => backToTop.classList.remove('flying'), 1200);
+      });
+    }
   }
 
   // ---- Maya's avatar (About page only): click for a fun qualification ----

@@ -67,21 +67,31 @@
   <div class="container">
     <p class="eyebrow" data-animate>The Toolkit</p>
     <h1 data-animate>Ingredients of My Magic</h1>
-    <p class="hero-text section-lede" data-animate style="margin-left:auto; margin-right:auto;">Every platform, language, and tool I reach for when a project calls for it. Tap a jar to see what's inside.</p>
+    <p class="hero-text section-lede" data-animate style="margin-left:auto; margin-right:auto;">Every platform, language and tool I reach for, now with fresh AI and AEO shelves. Open the cabinet, pick your ingredients and brew a project.</p>
   </div>
 </section>
 
 <section class="tools">
   <div class="container">
     <div class="ingredients-wrap">
-      <div class="ingredients-art" data-animate>
-        <svg class="icon"><use href="#icon-potion"/></svg>
-        <h3>Stocked &amp; Ready</h3>
-        <p>Six shelves, one cabinet, always stocked.</p>
-        <div class="ingredients-jarshelf" aria-hidden="true">
-          <span>🫙</span><span>🧪</span><span>🍯</span>
+      <aside class="cauldron-card" id="cauldron" data-animate>
+        <p class="eyebrow">Brew a Project</p>
+        <div class="cauldron-pot" id="cauldron-pot" aria-hidden="true">
+          <span class="pot-steam"><i></i><i></i><i></i></span>
+          <span class="pot-bubbles"><i></i><i></i><i></i><i></i></span>
+          <span class="pot-rim"><span class="pot-brew"></span></span>
+          <span class="pot-body"></span>
+          <span class="pot-legs"></span>
         </div>
-      </div>
+        <h3>Your Cauldron</h3>
+        <p class="cauldron-hint" id="cauldron-hint">Open the cabinet and tap any ingredient to drop it in. Then send the recipe my way.</p>
+        <ul class="cauldron-picks" id="cauldron-picks" aria-live="polite"></ul>
+        <div class="cauldron-actions">
+          <a class="btn btn-primary btn-small cauldron-send" id="cauldron-send" href="mailto:kalen.mayaa@gmail.com" aria-disabled="true">Brew it with Maya <span aria-hidden="true">✨</span></a>
+          <button type="button" class="cauldron-clear" id="cauldron-clear" hidden>Empty the cauldron</button>
+        </div>
+        <p class="cauldron-stats"><strong id="ingredient-count">60+</strong> ingredients on <strong id="shelf-count">6</strong> shelves</p>
+      </aside>
 
       <div class="cabinet" id="cabinet" data-animate>
         <div class="cabinet-doors" id="cabinet-doors">
@@ -93,19 +103,54 @@
           </div>
         </div>
       <div class="accordion">
-        <div class="accordion-item open">
+        <div class="accordion-item accordion-item--fresh open">
           <button class="accordion-head" aria-expanded="true">
-            <svg class="icon"><use href="#icon-quill"/></svg>
-            <h3>Design Tools</h3>
+            <svg class="icon"><use href="#icon-spark-gear"/></svg>
+            <h3>AI Tools &amp; Automation</h3>
+            <span class="shelf-badge">✦ Fresh</span>
             <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
           </button>
           <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
             <div class="chips">
-              <span class="chip">Figma</span>
-              <span class="chip">Adobe Photoshop</span>
-              <span class="chip">Illustrator</span>
-              <span class="chip">InDesign</span>
-              <span class="chip">Canva</span>
+              <button type="button" class="chip">ChatGPT</button>
+              <button type="button" class="chip">Claude</button>
+              <button type="button" class="chip">Perplexity.ai</button>
+              <button type="button" class="chip">Custom GPTs</button>
+              <button type="button" class="chip">AI Chatbots</button>
+              <button type="button" class="chip">AI Agents</button>
+              <button type="button" class="chip">Prompt Engineering</button>
+              <button type="button" class="chip">OpenAI API</button>
+              <button type="button" class="chip">Claude API</button>
+              <button type="button" class="chip">Zapier</button>
+              <button type="button" class="chip">Make.com</button>
+              <button type="button" class="chip">n8n</button>
+              <button type="button" class="chip">Zoho</button>
+            </div>
+          </div></div></div>
+        </div>
+
+        <div class="accordion-item accordion-item--fresh">
+          <button class="accordion-head" aria-expanded="false">
+            <svg class="icon"><use href="#icon-telescope"/></svg>
+            <h3>SEO, AEO &amp; Analytics</h3>
+            <span class="shelf-badge">✦ Fresh</span>
+            <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
+            <div class="chips">
+              <button type="button" class="chip">Answer Engine Optimization</button>
+              <button type="button" class="chip">Google AI Overviews</button>
+              <button type="button" class="chip">Schema Markup</button>
+              <button type="button" class="chip">Structured Data</button>
+              <button type="button" class="chip">Keyword Research</button>
+              <button type="button" class="chip">Core Web Vitals</button>
+              <button type="button" class="chip">Google Search Console</button>
+              <button type="button" class="chip">Google Analytics</button>
+              <button type="button" class="chip">Yoast SEO</button>
+              <button type="button" class="chip">Rank Math</button>
+              <button type="button" class="chip">SEMrush</button>
+              <button type="button" class="chip">Ahrefs</button>
+              <button type="button" class="chip">Screaming Frog</button>
             </div>
           </div></div></div>
         </div>
@@ -118,17 +163,17 @@
           </button>
           <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
             <div class="chips">
-              <span class="chip">WordPress</span>
-              <span class="chip">Shopify</span>
-              <span class="chip">Webflow</span>
-              <span class="chip">Squarespace</span>
-              <span class="chip">HubSpot</span>
-              <span class="chip">Wix</span>
-              <span class="chip">Go High Level</span>
-              <span class="chip">Kajabi</span>
-              <span class="chip">Kartra</span>
-              <span class="chip">ClickFunnels</span>
-              <span class="chip">Mailchimp</span>
+              <button type="button" class="chip">WordPress</button>
+              <button type="button" class="chip">Shopify</button>
+              <button type="button" class="chip">Webflow</button>
+              <button type="button" class="chip">Squarespace</button>
+              <button type="button" class="chip">HubSpot</button>
+              <button type="button" class="chip">Wix</button>
+              <button type="button" class="chip">Go High Level</button>
+              <button type="button" class="chip">Kajabi</button>
+              <button type="button" class="chip">Kartra</button>
+              <button type="button" class="chip">ClickFunnels</button>
+              <button type="button" class="chip">Mailchimp</button>
             </div>
           </div></div></div>
         </div>
@@ -141,32 +186,30 @@
           </button>
           <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
             <div class="chips">
-              <span class="chip">PHP</span>
-              <span class="chip">Laravel</span>
-              <span class="chip">HTML</span>
-              <span class="chip">CSS</span>
-              <span class="chip">JavaScript</span>
-              <span class="chip">React JS</span>
-              <span class="chip">Node JS</span>
+              <button type="button" class="chip">PHP</button>
+              <button type="button" class="chip">Laravel</button>
+              <button type="button" class="chip">HTML</button>
+              <button type="button" class="chip">CSS</button>
+              <button type="button" class="chip">JavaScript</button>
+              <button type="button" class="chip">React JS</button>
+              <button type="button" class="chip">Node JS</button>
             </div>
           </div></div></div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-head" aria-expanded="false">
-            <svg class="icon"><use href="#icon-spark-gear"/></svg>
-            <h3>AI Automation &amp; Integration</h3>
+            <svg class="icon"><use href="#icon-quill"/></svg>
+            <h3>Design Tools</h3>
             <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
           </button>
           <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
             <div class="chips">
-              <span class="chip">Zapier</span>
-              <span class="chip">Make.com</span>
-              <span class="chip">n8n</span>
-              <span class="chip">Zoho</span>
-              <span class="chip">ChatGPT</span>
-              <span class="chip">Claude</span>
-              <span class="chip">Perplexity.ai</span>
+              <button type="button" class="chip">Figma</button>
+              <button type="button" class="chip">Adobe Photoshop</button>
+              <button type="button" class="chip">Illustrator</button>
+              <button type="button" class="chip">InDesign</button>
+              <button type="button" class="chip">Canva</button>
             </div>
           </div></div></div>
         </div>
@@ -179,38 +222,19 @@
           </button>
           <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
             <div class="chips">
-              <span class="chip">AWS</span>
-              <span class="chip">Firebase</span>
-              <span class="chip">Digital Ocean</span>
-              <span class="chip">SQL</span>
-              <span class="chip">MySQL</span>
-              <span class="chip">MongoDB</span>
-              <span class="chip">PostgreSQL</span>
-              <span class="chip">Hostinger</span>
-              <span class="chip">GoDaddy</span>
-              <span class="chip">Cloudflare</span>
-              <span class="chip">GitHub</span>
-              <span class="chip">GitLab</span>
-              <span class="chip">Bitbucket</span>
-            </div>
-          </div></div></div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-head" aria-expanded="false">
-            <svg class="icon"><use href="#icon-telescope"/></svg>
-            <h3>SEO &amp; Analytics</h3>
-            <span class="accordion-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
-          </button>
-          <div class="accordion-panel"><div class="accordion-panel-inner"><div class="accordion-body">
-            <div class="chips">
-              <span class="chip">Google Search Console</span>
-              <span class="chip">Google Analytics</span>
-              <span class="chip">Yoast SEO</span>
-              <span class="chip">Rank Math</span>
-              <span class="chip">SEMrush</span>
-              <span class="chip">Ahrefs</span>
-              <span class="chip">Screaming Frog</span>
+              <button type="button" class="chip">AWS</button>
+              <button type="button" class="chip">Firebase</button>
+              <button type="button" class="chip">Digital Ocean</button>
+              <button type="button" class="chip">SQL</button>
+              <button type="button" class="chip">MySQL</button>
+              <button type="button" class="chip">MongoDB</button>
+              <button type="button" class="chip">PostgreSQL</button>
+              <button type="button" class="chip">Hostinger</button>
+              <button type="button" class="chip">GoDaddy</button>
+              <button type="button" class="chip">Cloudflare</button>
+              <button type="button" class="chip">GitHub</button>
+              <button type="button" class="chip">GitLab</button>
+              <button type="button" class="chip">Bitbucket</button>
             </div>
           </div></div></div>
         </div>
@@ -224,14 +248,60 @@
   </div>
 </section>
 
+
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
+<footer class="site-footer" id="site-footer">
+  <div class="footer-sky" aria-hidden="true">
+    <span class="footer-moon"></span>
+    <div class="footer-stars" id="footer-stars"></div>
+  </div>
+
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">Maya Kalen</a>
+      <p class="footer-role">Web Developer &amp; Designer</p>
+      <p class="footer-blurb">Websites that feel a little like magic, built by hand, one spell at a time.</p>
+      <div class="footer-chips">
+        <a href="mailto:kalen.mayaa@gmail.com" class="footer-chip"><span aria-hidden="true">✉️</span> kalen.mayaa@gmail.com</a>
+        <a href="https://www.instagram.com/web.developer_mayaa/" class="footer-chip" target="_blank" rel="noopener"><span aria-hidden="true">📸</span> @web.developer_mayaa</a>
+      </div>
+    </div>
+
+    <nav class="footer-map" aria-label="Footer">
+      <p class="footer-heading">Wander the Map</p>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="toolkit.html">Toolkit</a></li>
+        <li><a href="process.html">Process</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-wish">
+      <p class="footer-heading">Catch a Falling Star</p>
+      <p class="footer-wish-text">Tap below and the night sky will read your fortune.</p>
+      <button type="button" class="star-catch-btn sparkle-host" id="star-catch">
+        <span class="star-catch-icon" aria-hidden="true">🌠</span> Read my stars
+      </button>
+      <p class="footer-fortune" id="footer-fortune" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="container footer-signoff">
+    <p class="footer-script">Until the next spell <span aria-hidden="true">✦</span></p>
+  </div>
+
+  <div class="container footer-bottom">
     <p>&copy; <span id="year"></span> Maya Kalen. All rights reserved.</p>
-    <a href="#top" class="back-to-top">Back to top ↑</a>
+    <p class="footer-craft">Hand-coded with care and a sprinkle of stardust.</p>
+    <a href="#top" class="back-to-top" id="back-to-top">Fly back up <span class="broom" aria-hidden="true">🧹</span></a>
   </div>
 </footer>
+
 
 <a href="mailto:kalen.mayaa@gmail.com" class="email-fab" id="email-fab" aria-label="Email Maya Kalen">
   <span aria-hidden="true">✉️</span>
