@@ -199,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cover.classList.toggle('is-modal', modal);
       placeCover(book, modal);
       book.classList.add('is-out');
+      document.dispatchEvent(new CustomEvent('magic:book'));
       void cover.offsetWidth;
       cover.classList.add('open');
       if (modal && coverBackdrop) coverBackdrop.classList.add('open');
@@ -735,6 +736,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor.textContent = '🪄';
     cursor.setAttribute('aria-hidden', 'true');
     document.body.appendChild(cursor);
+    document.documentElement.classList.add('has-wand');
 
     let lastX = window.innerWidth / 2;
     let lastY = window.innerHeight / 2;
@@ -753,7 +755,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Over the header, hide the wand entirely and let the real pointer
       // show through — nav links are the most important click target on
       // the site and deserve zero ambiguity about where the click lands.
-      if (e.target.closest('.site-header')) {
+      // Text fields keep their own I-beam cursor too, so the wand steps aside.
+      if (e.target.closest('.site-header, input, textarea, select')) {
         cursor.style.opacity = '0';
         return;
       }
@@ -1019,6 +1022,290 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           if (wishSubmitBtn) wishSubmitBtn.disabled = false;
         });
+    });
+  }
+
+  // ==========================================================================
+  // Hidden magic: secrets worth magic points, a footer meter with hints,
+  // a "leaving so soon?" goodbye, and Midnight the shy lurking cat
+  // ==========================================================================
+  const EGGS = {
+    brand: { label: 'You cast a spell on my name', hint: 'Names have power. Try mine, right at the top.' },
+    wisp: { label: 'You said hi to Wisp', hint: 'The little cat in the corner has opinions.' },
+    stars: { label: 'The stars read your fortune', hint: 'The night sky down in the footer reads fortunes.' },
+    moon: { label: 'You waved at the moon', hint: 'Someone should say hello to the moon in the footer.' },
+    avatar: { label: 'Maya shared a secret fact', hint: 'Maya has fun facts, if you give her a poke on the About page.' },
+    flip: { label: 'You found the other side of a card', hint: 'Every card has two sides. Peek behind one on the Services page.' },
+    cabinet: { label: 'You unlocked the cabinet', hint: 'Every cabinet has a key. Find it on the Toolkit page.' },
+    cauldron: { label: 'Something is brewing', hint: 'A cauldron on the Toolkit page is hungry for ingredients.' },
+    book: { label: 'You pulled a book off the shelf', hint: 'Some books want to be read. Visit the Portfolio shelves.' },
+    gate: { label: 'Brave soul, you dared to enter', hint: 'The home page guards the Spellbook. Dare to enter it.' },
+    cat: { label: 'You caught Midnight, Wisp\'s shy cousin', hint: 'A shy black cat peeks out between sections. Catch her if you can.' },
+    spell: { label: 'You spoke the secret word', hint: 'Every wizard knows the magic word. Just type it, anywhere on the page.' },
+  };
+  const EGG_IDS = Object.keys(EGGS);
+  const EGG_POINTS = 10;
+  const EGG_KEY = 'mayaMagicSecrets';
+  const reduceMagicMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const loadFound = () => {
+    try { return new Set(JSON.parse(localStorage.getItem(EGG_KEY) || '[]').filter((id) => EGGS[id])); } catch (e) { return new Set(); }
+  };
+  const foundEggs = loadFound();
+  const saveFound = () => {
+    try { localStorage.setItem(EGG_KEY, JSON.stringify([...foundEggs])); } catch (e) { /* private mode: keep it in memory */ }
+  };
+  const magicPoints = () => foundEggs.size * EGG_POINTS;
+
+  // a small toast of its own, so it never fights the other site toasts
+  const eggToast = document.createElement('div');
+  eggToast.className = 'egg-toast';
+  eggToast.setAttribute('role', 'status');
+  eggToast.setAttribute('aria-live', 'polite');
+  document.body.appendChild(eggToast);
+  let eggToastTimer;
+  const showEggToast = (html, ms = 3200) => {
+    eggToast.innerHTML = html;
+    eggToast.classList.add('show');
+    clearTimeout(eggToastTimer);
+    eggToastTimer = setTimeout(() => eggToast.classList.remove('show'), ms);
+  };
+
+  // the footer meter: subtle, and a hint machine when clicked
+  const footerBottom = document.querySelector('.footer-bottom');
+  let eggCountEl = null;
+  if (footerBottom) {
+    const meter = document.createElement('button');
+    meter.type = 'button';
+    meter.className = 'egg-meter';
+    meter.innerHTML = `<span aria-hidden="true">✦</span> Psst… there's hidden magic on this site <strong><span id="egg-count">${foundEggs.size}</span>/${EGG_IDS.length}</strong> found`;
+    meter.title = 'Click for a hint';
+    footerBottom.insertBefore(meter, footerBottom.querySelector('.back-to-top'));
+    eggCountEl = meter.querySelector('#egg-count');
+    meter.addEventListener('click', () => {
+      const missing = EGG_IDS.filter((id) => !foundEggs.has(id));
+      if (!missing.length) {
+        showEggToast(`🏆 <strong>All ${EGG_IDS.length} secrets found!</strong> You are officially a wizard. ${magicPoints()} magic points.`, 4200);
+        return;
+      }
+      const pick = missing[Math.floor(Math.random() * missing.length)];
+      showEggToast(`🔮 <strong>Hint:</strong> ${EGGS[pick].hint}`, 5200);
+    });
+  }
+
+  const findEgg = (id, x, y) => {
+    if (!EGGS[id] || foundEggs.has(id)) return;
+    foundEggs.add(id);
+    saveFound();
+    if (eggCountEl) eggCountEl.textContent = foundEggs.size;
+    const allFound = foundEggs.size === EGG_IDS.length;
+    setTimeout(() => {
+      showEggToast(allFound
+        ? `🏆 <strong>+${EGG_POINTS} magic points!</strong> ${EGGS[id].label}. That's all ${EGG_IDS.length} secrets. You are officially a wizard!`
+        : `✨ <strong>+${EGG_POINTS} magic points!</strong> ${EGGS[id].label}. <span>${foundEggs.size}/${EGG_IDS.length} secrets found</span>`, allFound ? 5200 : 3400);
+      if (!reduceMagicMotion) {
+        const cx = x ?? window.innerWidth / 2;
+        const cy = y ?? window.innerHeight - 120;
+        for (let i = 0; i < 14; i += 1) {
+          setTimeout(() => spawnViewportStar(cx + (Math.random() - 0.5) * 120, cy + (Math.random() - 0.5) * 60), i * 25);
+        }
+      }
+    }, 450);
+  };
+
+  // secrets hidden in things people can already click
+  document.addEventListener('click', (e) => {
+    const t = e.target;
+    const at = [e.clientX, e.clientY];
+    if (t.closest('.brand')) findEgg('brand', ...at);
+    else if (t.closest('#wisp')) findEgg('wisp', ...at);
+    else if (t.closest('#star-catch')) findEgg('stars', ...at);
+    else if (t.closest('.footer-moon')) findEgg('moon', ...at);
+    else if (t.closest('#maya-avatar')) findEgg('avatar', ...at);
+    else if (t.closest('.flip-card')) findEgg('flip', ...at);
+    else if (t.closest('#cabinet-doors')) findEgg('cabinet', ...at);
+    else if (t.closest('.accordion button.chip')) findEgg('cauldron', ...at);
+    else if (t.closest('#gate-yes')) findEgg('gate', ...at);
+  });
+  document.addEventListener('magic:book', () => findEgg('book'));
+
+  // the moon in the footer is secretly clickable
+  const footerMoon = document.querySelector('.footer-moon');
+  if (footerMoon) {
+    footerMoon.addEventListener('click', () => {
+      footerMoon.classList.remove('wave');
+      void footerMoon.offsetWidth;
+      footerMoon.classList.add('wave');
+    });
+  }
+
+  // the secret word: type "magic" anywhere on the page (letters are read from
+  // the physical keys, so caps lock and keyboard layout never get in the way)
+  const SECRET_WORD = 'magic';
+  let typed = '';
+  document.addEventListener('keydown', (e) => {
+    if (e.target.closest && e.target.closest('input, textarea, select')) return;
+    const letter = /^Key[A-Z]$/.test(e.code || '') ? e.code.slice(3).toLowerCase() : (e.key || '').toLowerCase();
+    if (letter.length !== 1) return;
+    typed = (typed + letter).slice(-SECRET_WORD.length);
+    if (typed === SECRET_WORD) {
+      typed = '';
+      if (foundEggs.has('spell')) showEggToast('🪄 <strong>Abracadabra!</strong> You already found this secret, but have some stars anyway.', 3200);
+      findEgg('spell');
+      if (!reduceMagicMotion) {
+        for (let i = 0; i < 40; i += 1) {
+          setTimeout(() => spawnViewportStar(Math.random() * window.innerWidth, Math.random() * window.innerHeight * 0.8), i * 30);
+        }
+      }
+    }
+  });
+
+  // ---- "Leaving so soon?": when the pointer heads for the tab bar or close
+  // button, once per visit, desktop only (browsers do not allow custom text
+  // in the real close-tab dialog, so this is the friendly version) ----
+  const canSenseExit = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (canSenseExit) {
+    const arrivedAt = Date.now();
+    let leaveShown = false;
+    try { leaveShown = sessionStorage.getItem('mayaLeaveShown') === '1'; } catch (e) { /* ignore */ }
+
+    const leave = document.createElement('div');
+    leave.className = 'gate-overlay leave-overlay';
+    leave.innerHTML = `
+      <div class="gate-modal leave-modal" role="dialog" aria-modal="true" aria-labelledby="leave-title">
+        <span class="gate-mascot" aria-hidden="true">🧙‍♀️</span>
+        <h3 id="leave-title">Leaving so soon?</h3>
+        <p class="leave-score"></p>
+        <div class="gate-actions">
+          <button type="button" class="btn btn-primary leave-stay">Stay and explore</button>
+          <a href="contact.html" class="btn btn-outline">Say hi before I go</a>
+        </div>
+        <button type="button" class="leave-hint">Need a hint?</button>
+      </div>`;
+    document.body.appendChild(leave);
+    const leaveScore = leave.querySelector('.leave-score');
+    const leaveHint = leave.querySelector('.leave-hint');
+
+    const closeLeave = () => leave.classList.remove('open');
+    const openLeave = () => {
+      const n = foundEggs.size;
+      const total = EGG_IDS.length;
+      leaveScore.innerHTML = n === 0
+        ? `There are <strong>${total} secrets</strong> hidden around this magic world and you haven't found one yet. Sure you want to leave?`
+        : n === total
+          ? `You found <strong>every single secret</strong> and collected <strong>${magicPoints()} magic points</strong>. Legendary. Come back soon, wizard!`
+          : `Congrats, you've collected <strong>${magicPoints()} magic points</strong> and found <strong>${n} of ${total}</strong> secrets. Are you sure you want to leave the magic world?`;
+      leaveHint.hidden = n === total;
+      leave.classList.add('open');
+      leave.querySelector('.leave-stay').focus();
+    };
+
+    document.addEventListener('mouseout', (e) => {
+      if (leaveShown || e.relatedTarget || e.clientY > 8) return;
+      if (Date.now() - arrivedAt < 8000) return;
+      if (document.querySelector('.gate-overlay.open, .book-cover.open')) return;
+      leaveShown = true;
+      try { sessionStorage.setItem('mayaLeaveShown', '1'); } catch (err) { /* ignore */ }
+      openLeave();
+    });
+    leave.addEventListener('click', (e) => { if (e.target === leave) closeLeave(); });
+    leave.querySelector('.leave-stay').addEventListener('click', closeLeave);
+    leaveHint.addEventListener('click', () => {
+      closeLeave();
+      const missing = EGG_IDS.filter((id) => !foundEggs.has(id));
+      if (missing.length) showEggToast(`🔮 <strong>Hint:</strong> ${EGGS[missing[Math.floor(Math.random() * missing.length)]].hint}`, 5200);
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLeave(); });
+  }
+
+  // ---- Midnight, Wisp's shy cousin, lurks around the page ----
+  if (!reduceMagicMotion) {
+    const CAT_SVG = `
+      <svg viewBox="0 0 120 92" aria-hidden="true">
+        <path d="M22 50 14 8l30 22Z" fill="#2b1d10"/><path d="M98 50l8-42-30 22Z" fill="#2b1d10"/>
+        <path d="M24 40 19 17l15 12Z" fill="#cc704b" opacity=".75"/><path d="M96 40l5-23-15 12Z" fill="#cc704b" opacity=".75"/>
+        <ellipse cx="60" cy="58" rx="44" ry="36" fill="#2b1d10"/>
+        <g class="lurker-eyes">
+          <ellipse cx="43" cy="54" rx="9" ry="10" fill="#e8c07d"/><ellipse cx="77" cy="54" rx="9" ry="10" fill="#e8c07d"/>
+          <ellipse class="lurker-pupil" cx="43" cy="55" rx="3.2" ry="7.5" fill="#1a1109"/><ellipse class="lurker-pupil" cx="77" cy="55" rx="3.2" ry="7.5" fill="#1a1109"/>
+          <circle cx="45.5" cy="51" r="2" fill="#fff"/><circle cx="79.5" cy="51" r="2" fill="#fff"/>
+        </g>
+        <path d="M56 68h8l-4 4.5Z" fill="#cc704b"/>
+        <path d="M30 66 8 62M30 71 9 73M90 66l22-4M90 71l21 2" stroke="#f1d9b1" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+        <ellipse cx="34" cy="88" rx="13" ry="8" fill="#2b1d10"/><ellipse cx="86" cy="88" rx="13" ry="8" fill="#2b1d10"/>
+      </svg>`;
+
+    const lurker = document.createElement('button');
+    lurker.type = 'button';
+    lurker.className = 'lurker';
+    lurker.setAttribute('aria-label', 'A shy black cat is peeking at you. Catch her!');
+    lurker.innerHTML = CAT_SVG;
+    const runner = document.createElement('span');
+    runner.className = 'lurker-runner';
+    runner.setAttribute('aria-hidden', 'true');
+    runner.textContent = '🐈‍⬛';
+
+    let catBusy = false;
+    let hideTimer = null;
+    let shyTimer = null;
+
+    const visibleSections = () => [...document.querySelectorAll('main > section')].filter((s) => {
+      const r = s.getBoundingClientRect();
+      // the section's bottom edge must be on screen, clear of the header
+      return r.bottom > 160 && r.bottom < window.innerHeight - 20 && r.width > 300;
+    });
+
+    const hideCat = (fast) => {
+      clearTimeout(hideTimer);
+      clearTimeout(shyTimer);
+      lurker.classList.remove('peek');
+      lurker.classList.toggle('duck', !!fast);
+      setTimeout(() => { lurker.remove(); lurker.classList.remove('duck', 'caught'); catBusy = false; }, fast ? 300 : 700);
+    };
+
+    const peek = (section) => {
+      lurker.style.left = `${8 + Math.random() * 76}%`;
+      lurker.classList.toggle('flip', Math.random() < 0.5);
+      section.appendChild(lurker);
+      void lurker.offsetWidth;
+      lurker.classList.add('peek');
+      hideTimer = setTimeout(() => hideCat(false), 4200 + Math.random() * 2200);
+    };
+
+    const dash = (section) => {
+      const toRight = Math.random() < 0.5;
+      runner.classList.toggle('to-left', !toRight);
+      section.appendChild(runner);
+      void runner.offsetWidth;
+      runner.classList.add('run');
+      setTimeout(() => { runner.classList.remove('run'); runner.remove(); catBusy = false; }, 2600);
+    };
+
+    const visit = () => {
+      if (!catBusy && !document.hidden && !document.querySelector('.gate-overlay.open, .book-cover.open')) {
+        const spots = visibleSections();
+        if (spots.length) {
+          catBusy = true;
+          const section = spots[Math.floor(Math.random() * spots.length)];
+          if (Math.random() < 0.72) peek(section); else dash(section);
+        }
+      }
+      setTimeout(visit, 22000 + Math.random() * 20000);
+    };
+    setTimeout(visit, 9000 + Math.random() * 6000);
+
+    // she is shy: linger over her too long and she ducks away
+    lurker.addEventListener('mouseenter', () => {
+      clearTimeout(shyTimer);
+      shyTimer = setTimeout(() => { if (lurker.classList.contains('peek')) hideCat(true); }, 900);
+    });
+    lurker.addEventListener('mouseleave', () => clearTimeout(shyTimer));
+    lurker.addEventListener('click', (e) => {
+      if (!lurker.classList.contains('peek')) return;
+      clearTimeout(shyTimer);
+      lurker.classList.add('caught');
+      findEgg('cat', e.clientX, e.clientY);
+      setTimeout(() => hideCat(true), 650);
     });
   }
 

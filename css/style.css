@@ -137,7 +137,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   font-family: var(--font-display);
   font-size: 1.12rem;
   border: 2px solid transparent;
-  cursor: none;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -209,15 +209,17 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
 /* ==========================================================================
    Magic wand cursor + trailing sparkle
    ========================================================================== */
+/* the OS pointer is hidden only while the wand is actually running (the script
+   adds .has-wand), so there is never a finger and a wand at the same time,
+   and reduced-motion visitors, who get no wand, keep their normal cursor */
+.has-wand, .has-wand *:not(input):not(textarea):not(select) { cursor: none !important; }
 @media (pointer: fine) {
-  body, a, button, .nav-toggle, .btn, .accordion-head { cursor: none; }
   /* the header is the most important click target on the site, so it
      keeps the real OS pointer rather than the custom wand graphic —
      a hand-drawn cursor's visual tip is never pixel-perfect against the
      real click point, which is exactly the kind of thing that makes
      small nav links feel randomly unclickable */
-  .site-header, .site-header * { cursor: pointer !important; }
-  .site-header .brand-name, .site-header .brand-role { cursor: pointer !important; }
+  .has-wand .site-header, .has-wand .site-header * { cursor: pointer !important; }
 }
 .magic-cursor {
   position: fixed;
@@ -336,7 +338,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   background: var(--green-soft);
   border: 2px solid transparent;
   border-radius: 50%;
-  cursor: none;
+  cursor: pointer;
   flex-shrink: 0;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
@@ -559,7 +561,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   box-shadow: var(--shadow-sm);
   margin-bottom: 14px;
   transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease;
-  cursor: none;
+  cursor: pointer;
 }
 @media (pointer: coarse) { .const-circle { cursor: pointer; } }
 .const-node:nth-child(1) .const-circle { --ring-color: var(--gold); }
@@ -817,7 +819,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   position: relative;
   min-height: 250px;
   perspective: 1400px;
-  cursor: none;
+  cursor: pointer;
   transition: transform 0.25s ease;
 }
 @media (pointer: coarse) { .bento-card { cursor: pointer; } }
@@ -1021,7 +1023,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   box-sizing: border-box;
   background: linear-gradient(160deg, var(--sand) 0%, var(--sand-dark) 100%);
   border: 1px solid rgba(97, 65, 36, 0.25);
-  cursor: none;
+  cursor: pointer;
   transform-style: preserve-3d;
   transition: transform 0.85s cubic-bezier(.6, -0.15, .3, 1.15);
 }
@@ -1111,7 +1113,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
 .accordion-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
 .accordion-item.open .accordion-panel { grid-template-rows: 1fr; }
 .accordion-panel-inner { overflow: hidden; }
-.accordion-body { position: relative; padding: 0 22px 22px 62px; }
+.accordion-body { position: relative; padding: 6px 22px 24px 76px; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
@@ -1138,7 +1140,9 @@ button.chip[aria-pressed="true"] {
 }
 button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; color: var(--sand); }
 
-.accordion-item--fresh .accordion-head { background: linear-gradient(90deg, rgba(var(--sand-rgb), 0.18), transparent 70%); }
+/* the "fresh" tint fades softly down the whole shelf rather than stopping
+   in a hard line under the heading */
+.accordion-item--fresh { background: linear-gradient(180deg, rgba(var(--sand-rgb), 0.2), rgba(var(--sand-rgb), 0.06) 70px, transparent 160px); }
 .shelf-badge {
   flex-shrink: 0;
   padding: 3px 10px;
@@ -1793,7 +1797,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   align-items: center;
   justify-content: center;
   padding: 0;
-  cursor: none;
+  cursor: pointer;
   transition: transform 0.25s cubic-bezier(.22,1,.36,1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
 @media (pointer: coarse) { .wisp { cursor: pointer; } }
@@ -1852,12 +1856,12 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
 .maya-avatar-wrap { position: relative; width: 240px; margin: 0 auto; text-align: center; }
 .maya-avatar {
   display: block;
-  width: 220px; height: 240px;
+  width: 220px; height: 300px;
   margin: 0 auto;
   padding: 0;
   background: none;
   border: none;
-  cursor: none;
+  cursor: pointer;
   animation: avatarBob 4.5s ease-in-out infinite;
   transition: transform 0.25s ease;
 }
@@ -1885,24 +1889,23 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   opacity: 0.75;
 }
 
-/* the avatar sits centered in its own column (not pinned to a viewport
-   edge like Wisp), so the bubble is safe to open straight above it */
+/* Maya's facts open just below her, in the space the "click me" hint uses,
+   so the bubble never covers her face, her hat or the site header */
 .maya-fact-bubble {
   left: 50%; right: auto;
-  bottom: calc(100% + 18px); top: auto;
-  transform: translate(-50%, 8px);
-  max-width: 230px;
+  top: 290px; bottom: auto;
+  z-index: 3;
+  width: 240px;
+  max-width: calc(100vw - 48px);
+  text-align: center;
+  transform: translate(-50%, -8px);
 }
-.maya-fact-bubble::after {
-  right: auto; left: 50%;
-  top: 100%; bottom: auto;
-  transform: translateX(-50%);
-  border-right-color: transparent;
-  border-top-color: var(--ink);
-  border-left: 7px solid transparent;
-  border-bottom: 0;
-}
+/* thought dots float up from the bubble toward Maya */
+.maya-fact-bubble::before { left: calc(50% - 6px); bottom: auto; top: -17px; }
+.maya-fact-bubble::after { left: calc(50% + 6px); bottom: auto; top: -29px; }
 .maya-fact-bubble.show { transform: translate(-50%, 0); }
+.maya-fact-bubble.show ~ .maya-avatar-hint { opacity: 0; }
+.maya-avatar-hint { transition: opacity 0.2s ease; }
 
 @media (max-width: 900px) { .maya-avatar-wrap { margin-top: 40px; } }
 
@@ -2584,4 +2587,135 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
 @media (max-width: 480px) {
   .container { padding: 0 18px; }
   .hero-actions .btn { width: 100%; }
+}
+
+/* ==========================================================================
+   Hidden magic: secrets, the points toast, the footer meter, the goodbye
+   pop-up, and Midnight the shy lurking cat
+   ========================================================================== */
+.egg-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 96px;
+  z-index: 450;
+  width: max-content;
+  max-width: min(440px, calc(100vw - 32px));
+  padding: 12px 20px;
+  border-radius: 18px;
+  border: 2px solid var(--gold);
+  background: var(--cream-soft);
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  box-shadow: 0 0 0 5px rgba(var(--gold-rgb), 0.14), var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 16px) scale(0.96);
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(.22,1.3,.36,1);
+}
+.egg-toast.show { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.egg-toast strong { color: var(--gold-dark); }
+.egg-toast span { display: block; margin-top: 2px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+
+.egg-meter {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 600 0.84rem var(--font-body);
+  color: rgba(255, 248, 234, 0.6);
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.egg-meter span { color: var(--sand); }
+.egg-meter strong { margin-left: 4px; color: var(--sand); }
+.egg-meter:hover, .egg-meter:focus-visible { color: var(--cream-soft); }
+.egg-meter:focus-visible { outline: 2px solid var(--sand); outline-offset: 4px; border-radius: 4px; }
+
+/* the footer moon is secretly clickable */
+.footer-moon { z-index: 3; pointer-events: auto; cursor: pointer; }
+.footer-moon.wave { animation: moonWave 0.9s ease; }
+@keyframes moonWave {
+  0% { rotate: 0deg; scale: 1; }
+  30% { rotate: -28deg; scale: 1.25; }
+  60% { rotate: 14deg; scale: 1.1; }
+  100% { rotate: 0deg; scale: 1; }
+}
+
+.leave-score strong { color: var(--gold-dark); }
+.leave-hint {
+  margin-top: 16px;
+  padding: 2px 4px;
+  border: 0;
+  background: none;
+  font: 700 0.86rem var(--font-body);
+  color: var(--ink-soft);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Midnight peeks up from the bottom edge of a section (sections clip their
+   overflow, so she is hidden below the edge until she rises) */
+.lurker {
+  position: absolute;
+  bottom: 0;
+  z-index: 6;
+  width: 96px;
+  height: 74px;
+  margin-left: -48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  transform: translateY(110%);
+  transition: transform 0.6s cubic-bezier(.3, 1.4, .5, 1);
+  cursor: pointer;
+}
+.lurker svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.lurker.flip svg { transform: scaleX(-1); }
+.lurker.peek { transform: translateY(14%); }
+.lurker.peek svg { animation: lurkerTilt 3.2s ease-in-out infinite; transform-origin: 50% 90%; }
+.lurker.flip.peek svg { animation-name: lurkerTiltFlip; }
+.lurker.duck { transform: translateY(115%); transition-duration: 0.22s; transition-timing-function: ease-in; }
+.lurker.caught { transform: translateY(-26%); transition: transform 0.25s cubic-bezier(.3, 1.6, .5, 1); }
+.lurker-eyes { transform-origin: 60px 54px; animation: lurkerBlink 3.6s infinite; }
+.lurker-pupil { animation: lurkerLook 4.4s ease-in-out infinite; }
+.lurker:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-radius: 12px; }
+@keyframes lurkerBlink { 0%, 44%, 50%, 100% { transform: scaleY(1); } 47% { transform: scaleY(0.1); } }
+@keyframes lurkerLook { 0%, 20% { transform: translateX(0); } 35%, 55% { transform: translateX(-3.5px); } 70%, 90% { transform: translateX(3.5px); } 100% { transform: translateX(0); } }
+@keyframes lurkerTilt { 0%, 100% { transform: rotate(0deg); } 40% { transform: rotate(-7deg); } 70% { transform: rotate(5deg); } }
+@keyframes lurkerTiltFlip { 0%, 100% { transform: scaleX(-1) rotate(0deg); } 40% { transform: scaleX(-1) rotate(-7deg); } 70% { transform: scaleX(-1) rotate(5deg); } }
+
+/* sometimes she just dashes across the bottom of a section */
+.lurker-runner {
+  position: absolute;
+  bottom: 4px;
+  left: -70px;
+  z-index: 6;
+  font-size: 2.6rem;
+  line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 3px rgba(97, 65, 36, 0.25));
+}
+.lurker-runner.run { animation: catDashRight 2.4s linear forwards; }
+.lurker-runner.to-left { left: auto; right: -70px; }
+.lurker-runner.to-left.run { animation-name: catDashLeft; }
+@keyframes catDashRight {
+  0% { transform: translate(0, 0) scaleX(-1); }
+  25% { transform: translate(28vw, -10px) scaleX(-1); }
+  50% { transform: translate(56vw, 0) scaleX(-1); }
+  75% { transform: translate(84vw, -10px) scaleX(-1); }
+  100% { transform: translate(calc(100vw + 140px), 0) scaleX(-1); }
+}
+@keyframes catDashLeft {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-28vw, -10px); }
+  50% { transform: translate(-56vw, 0); }
+  75% { transform: translate(-84vw, -10px); }
+  100% { transform: translate(calc(-100vw - 140px), 0); }
+}
+@media (max-width: 640px) {
+  .lurker { width: 78px; height: 60px; margin-left: -39px; }
+  .egg-toast { bottom: 90px; font-size: 0.86rem; }
 }
