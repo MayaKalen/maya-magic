@@ -4,6 +4,19 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ---- Spooky season: Halloween mode switches itself on from Oct 24 to
+  // Nov 2. Visitors can turn it off with the pumpkin toggle, and
+  // ?spooky=1 / ?spooky=0 previews it any time of year ----
+  const today = new Date();
+  const inSpookySeason = (today.getMonth() === 9 && today.getDate() >= 24) || (today.getMonth() === 10 && today.getDate() <= 2);
+  const spookyParam = new URLSearchParams(window.location.search).get('spooky');
+  let spookyChoice = null;
+  try { spookyChoice = localStorage.getItem('mayaSpooky'); } catch (e) { /* ignore */ }
+  const spookyAvailable = inSpookySeason || spookyParam === '1';
+  const spookyStartsOn = spookyParam === '1' || (spookyParam !== '0' && inSpookySeason && spookyChoice !== 'off');
+  document.documentElement.classList.toggle('spooky', spookyStartsOn);
+  const isSpooky = () => document.documentElement.classList.contains('spooky');
+
   // ---- Footer year ----
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -569,20 +582,29 @@ document.addEventListener('DOMContentLoaded', () => {
       'The cosmos approves of your color palette.',
       'Great things are loading. Please stand by.',
     ];
+    const SPOOKY_FORTUNES = [
+      'A ghost in your inbox whispers: launch the site.',
+      'The pumpkins predict a hauntingly fast homepage.',
+      'Beware: your competitors will be spooked by your new site.',
+      'A friendly witch says your bounce rate is about to vanish.',
+      'Something wicked good this way comes. It is your launch day.',
+      'The bats have spoken: more visitors are flying your way.',
+    ];
     const starCatch = document.getElementById('star-catch');
     const fortuneEl = document.getElementById('footer-fortune');
     let lastFortune = -1;
 
     if (starCatch && fortuneEl) {
       starCatch.addEventListener('click', () => {
+        const pool = isSpooky() ? SPOOKY_FORTUNES : FORTUNES;
         let pick;
-        do { pick = Math.floor(Math.random() * FORTUNES.length); } while (pick === lastFortune);
+        do { pick = Math.floor(Math.random() * pool.length); } while (pick === lastFortune && pool.length > 1);
         lastFortune = pick;
         fortuneEl.classList.remove('show');
         shootStar();
         spawnCardSparkle(starCatch, 6);
         setTimeout(() => {
-          fortuneEl.textContent = FORTUNES[pick];
+          fortuneEl.textContent = pool[pick];
           fortuneEl.classList.add('show');
         }, prefersReducedMotion ? 0 : 450);
       });
@@ -615,9 +637,18 @@ document.addEventListener('DOMContentLoaded', () => {
       '150+ projects shipped and counting.',
       '100% client satisfaction. Ask around.',
     ];
+    const SPOOKY_FACTS = [
+      'Dressed for Halloween, still shipping websites. 🎃',
+      'This cape is mostly for dramatic page loads.',
+      'Favorite potion: a fast website with a dash of SEO.',
+      'The pumpkin is my intern. It mostly glows.',
+      '150+ projects shipped, not one of them haunted. Probably.',
+      "Bachelor's in Computer Science, minor in broomstick aerodynamics.",
+    ];
     let avatarBubbleTimer;
     mayaAvatar.addEventListener('click', () => {
-      avatarBubble.textContent = FACTS[Math.floor(Math.random() * FACTS.length)];
+      const factPool = isSpooky() && Math.random() < 0.65 ? SPOOKY_FACTS : FACTS;
+      avatarBubble.textContent = factPool[Math.floor(Math.random() * factPool.length)];
       avatarBubble.classList.remove('show');
       void avatarBubble.offsetWidth;
       avatarBubble.classList.add('show');
@@ -829,6 +860,20 @@ document.addEventListener('DOMContentLoaded', () => {
       'I guard this corner. It is a very important job.',
       'Between us, the toolkit page has the best snacks.',
     ];
+    const SPOOKY_WISP_LINES = [
+      'Boo. Did I scare you? I am a black cat, it is literally my season. 🎃',
+      'Happy Halloween! I am dressed as a cat. Very original, I know.',
+      'Psst, a pumpkin is hiding somewhere on this site. I did not tell you.',
+      'Trick or treat? I accept treats. The trick is my outfit.',
+      'The bats in the footer owe me rent.',
+      'I tried to carve a pumpkin. It carved me a website instead.',
+      'Witch hat: borrowed. Attitude: my own. 🧙',
+    ];
+    // in spooky season Wisp mostly talks Halloween, with the odd usual line
+    const pickWispLine = () => {
+      const pool = isSpooky() && Math.random() < 0.7 ? SPOOKY_WISP_LINES : WISP_LINES;
+      return pool[Math.floor(Math.random() * pool.length)];
+    };
 
     let bubbleTimer;
     const showWispBubble = (text) => {
@@ -848,7 +893,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ), i * 30);
         }
       }
-      showWispBubble(WISP_LINES[Math.floor(Math.random() * WISP_LINES.length)]);
+      showWispBubble(pickWispLine());
     });
 
     // Wisp also talks on its own every so often, so the corner never feels
@@ -857,7 +902,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const delay = 10000 + Math.random() * 5000;
       setTimeout(() => {
         if (!document.hidden) {
-          showWispBubble(WISP_LINES[Math.floor(Math.random() * WISP_LINES.length)]);
+          showWispBubble(pickWispLine());
         }
         scheduleWispChatter();
       }, delay);
@@ -1042,8 +1087,11 @@ document.addEventListener('DOMContentLoaded', () => {
     gate: { label: 'Brave soul, you dared to enter', hint: 'The home page guards the Spellbook. Dare to enter it.' },
     cat: { label: 'You caught Midnight, Wisp\'s shy cousin', hint: 'A shy black cat peeks out between sections. Catch her if you can.' },
     spell: { label: 'You spoke the secret word', hint: 'Every wizard knows the magic word. Just type it, anywhere on the page.' },
+    // a seasonal bonus: it only appears in spooky season and never counts
+    // against the regular 12, so the hunt stays fair the rest of the year
+    pumpkin: { label: 'You found the hidden pumpkin', hint: 'A pumpkin is hiding somewhere on every page this Halloween. Look low, near the corners.', points: 13, bonus: true },
   };
-  const EGG_IDS = Object.keys(EGGS);
+  const EGG_IDS = Object.keys(EGGS).filter((id) => !EGGS[id].bonus);
   const EGG_POINTS = 10;
   const EGG_KEY = 'mayaMagicSecrets';
   const reduceMagicMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1055,7 +1103,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveFound = () => {
     try { localStorage.setItem(EGG_KEY, JSON.stringify([...foundEggs])); } catch (e) { /* private mode: keep it in memory */ }
   };
-  const magicPoints = () => foundEggs.size * EGG_POINTS;
+  const eggPoints = (id) => EGGS[id].points || EGG_POINTS;
+  const magicPoints = () => [...foundEggs].reduce((sum, id) => sum + eggPoints(id), 0);
+  const countFound = () => EGG_IDS.filter((id) => foundEggs.has(id)).length;
+  const huntableIds = () => (isSpooky() ? [...EGG_IDS, 'pumpkin'] : EGG_IDS);
 
   // a small toast of its own, so it never fights the other site toasts
   const eggToast = document.createElement('div');
@@ -1074,22 +1125,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // the footer meter: subtle, and a hint machine when clicked
   const footerBottom = document.querySelector('.footer-bottom');
   let eggCountEl = null;
+  let eggBonusEl = null;
   if (footerBottom) {
     const meter = document.createElement('button');
     meter.type = 'button';
     meter.className = 'egg-meter';
-    meter.innerHTML = `<span aria-hidden="true">✦</span> Psst… there's hidden magic on this site <strong><span id="egg-count">${foundEggs.size}</span>/${EGG_IDS.length}</strong> found`;
+    meter.innerHTML = `<span aria-hidden="true">✦</span> Psst… there's hidden magic on this site <strong><span id="egg-count">${countFound()}</span>/${EGG_IDS.length}</strong> found<em class="egg-bonus" aria-label="plus the Halloween pumpkin">${foundEggs.has('pumpkin') ? ' + 🎃' : ''}</em>`;
     meter.title = 'Click for a hint';
     footerBottom.insertBefore(meter, footerBottom.querySelector('.back-to-top'));
     eggCountEl = meter.querySelector('#egg-count');
+    eggBonusEl = meter.querySelector('.egg-bonus');
     meter.addEventListener('click', () => {
-      const missing = EGG_IDS.filter((id) => !foundEggs.has(id));
+      const missing = huntableIds().filter((id) => !foundEggs.has(id));
       if (!missing.length) {
-        showEggToast(`🏆 <strong>All ${EGG_IDS.length} secrets found!</strong> You are officially a wizard. ${magicPoints()} magic points.`, 4200);
+        showEggToast(`🏆 <strong>Every secret found!</strong> You are officially a wizard. ${magicPoints()} magic points.`, 4200);
         return;
       }
       const pick = missing[Math.floor(Math.random() * missing.length)];
-      showEggToast(`🔮 <strong>Hint:</strong> ${EGGS[pick].hint}`, 5200);
+      showEggToast(`${pick === 'pumpkin' ? '🎃' : '🔮'} <strong>Hint:</strong> ${EGGS[pick].hint}`, 5200);
     });
   }
 
@@ -1097,12 +1150,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!EGGS[id] || foundEggs.has(id)) return;
     foundEggs.add(id);
     saveFound();
-    if (eggCountEl) eggCountEl.textContent = foundEggs.size;
-    const allFound = foundEggs.size === EGG_IDS.length;
+    if (eggCountEl) eggCountEl.textContent = countFound();
+    if (eggBonusEl && foundEggs.has('pumpkin')) eggBonusEl.textContent = ' + 🎃';
+    const pts = eggPoints(id);
+    const allFound = !EGGS[id].bonus && countFound() === EGG_IDS.length;
     setTimeout(() => {
-      showEggToast(allFound
-        ? `🏆 <strong>+${EGG_POINTS} magic points!</strong> ${EGGS[id].label}. That's all ${EGG_IDS.length} secrets. You are officially a wizard!`
-        : `✨ <strong>+${EGG_POINTS} magic points!</strong> ${EGGS[id].label}. <span>${foundEggs.size}/${EGG_IDS.length} secrets found</span>`, allFound ? 5200 : 3400);
+      let msg;
+      if (EGGS[id].bonus) msg = `🎃 <strong>+${pts} spooky points!</strong> ${EGGS[id].label}. Happy Halloween! <span>Bonus secret found</span>`;
+      else if (allFound) msg = `🏆 <strong>+${pts} magic points!</strong> ${EGGS[id].label}. That's all ${EGG_IDS.length} secrets. You are officially a wizard!`;
+      else msg = `✨ <strong>+${pts} magic points!</strong> ${EGGS[id].label}. <span>${countFound()}/${EGG_IDS.length} secrets found</span>`;
+      showEggToast(msg, allFound || EGGS[id].bonus ? 5200 : 3400);
       if (!reduceMagicMotion) {
         const cx = x ?? window.innerWidth / 2;
         const cy = y ?? window.innerHeight - 120;
@@ -1112,6 +1169,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 450);
   };
+
 
   // secrets hidden in things people can already click
   document.addEventListener('click', (e) => {
@@ -1188,7 +1246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const closeLeave = () => leave.classList.remove('open');
     const openLeave = () => {
-      const n = foundEggs.size;
+      const n = countFound();
       const total = EGG_IDS.length;
       leaveScore.innerHTML = n === 0
         ? `There are <strong>${total} secrets</strong> hidden around this magic world and you haven't found one yet. Sure you want to leave?`
@@ -1290,7 +1348,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (Math.random() < 0.72) peek(section); else dash(section);
         }
       }
-      setTimeout(visit, 22000 + Math.random() * 20000);
+      // black cats are the stars of Halloween, so Midnight visits more often then
+      setTimeout(visit, isSpooky() ? 13000 + Math.random() * 12000 : 22000 + Math.random() * 20000);
     };
     setTimeout(visit, 9000 + Math.random() * 6000);
 
@@ -1307,6 +1366,144 @@ document.addEventListener('DOMContentLoaded', () => {
       findEgg('cat', e.clientX, e.clientY);
       setTimeout(() => hideCat(true), 650);
     });
+  }
+
+  // ==========================================================================
+  // Spooky mode: Halloween props, a home banner, a hidden pumpkin on every
+  // page, and bats in the footer sky. Only built during spooky season.
+  // ==========================================================================
+  if (spookyAvailable) {
+    const SPOOKY_PROPS = ['🎃', '🦇', '🕸️', '👻', '🕯️', '🦇'];
+    const props = [...document.querySelectorAll('.floaty.prop')];
+
+    const applyProps = (on) => {
+      props.forEach((el, i) => {
+        if (!el.dataset.everyday) el.dataset.everyday = el.textContent;
+        // swap about two of every three props, so the site still feels like itself
+        el.textContent = on && i % 3 !== 2 ? SPOOKY_PROPS[i % SPOOKY_PROPS.length] : el.dataset.everyday;
+      });
+    };
+
+    // ---- the pumpkin toggle, tucked just above Wisp ----
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'spooky-toggle';
+    toggle.innerHTML = '<span aria-hidden="true">🎃</span>';
+    const syncToggle = () => {
+      const on = isSpooky();
+      toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+      toggle.setAttribute('aria-label', on ? 'Turn off Halloween mode' : 'Turn on Halloween mode');
+      toggle.title = on ? 'Halloween mode is on. Click to turn it off.' : 'Halloween mode is off. Click to turn it on.';
+    };
+    document.body.appendChild(toggle);
+    document.documentElement.classList.add('has-spooky-toggle');
+
+    // ---- a slim, dismissible banner on the home page ----
+    let banner = null;
+    let bannerDismissed = false;
+    try { bannerDismissed = localStorage.getItem('mayaSpookyBanner') === 'closed'; } catch (e) { /* ignore */ }
+    const onHome = !!document.querySelector('.constellation-section, #explore');
+    if (onHome && !bannerDismissed) {
+      banner = document.createElement('div');
+      banner.className = 'spooky-banner';
+      banner.setAttribute('role', 'note');
+      banner.innerHTML = `<p><span aria-hidden="true">🎃</span> Happy Halloween from the Maya Magic world! A pumpkin is hiding somewhere on this site. <strong>Find it for a treat.</strong></p>
+        <button type="button" class="spooky-banner-close" aria-label="Close the Halloween banner">×</button>`;
+      document.body.insertBefore(banner, document.body.firstChild);
+      banner.querySelector('.spooky-banner-close').addEventListener('click', () => {
+        banner.remove();
+        banner = null;
+        try { localStorage.setItem('mayaSpookyBanner', 'closed'); } catch (e) { /* ignore */ }
+      });
+    }
+
+    // ---- one hidden pumpkin per page, in a low corner of a random section ----
+    const sections = [...document.querySelectorAll('main > section')];
+    const pumpkinHome = sections.length > 1 ? sections[1 + Math.floor(Math.random() * (sections.length - 1))] : sections[0];
+    let pumpkin = null;
+    if (pumpkinHome) {
+      pumpkin = document.createElement('button');
+      pumpkin.type = 'button';
+      pumpkin.className = 'hidden-pumpkin';
+      pumpkin.setAttribute('aria-label', 'A hidden pumpkin! Click it');
+      pumpkin.innerHTML = '<span aria-hidden="true">🎃</span><em aria-hidden="true">Hehehe!</em>';
+      const onLeft = Math.random() < 0.5;
+      pumpkin.style[onLeft ? 'left' : 'right'] = `${3 + Math.random() * 6}%`;
+      pumpkinHome.appendChild(pumpkin);
+      pumpkin.addEventListener('click', (e) => {
+        pumpkin.classList.remove('lit');
+        void pumpkin.offsetWidth;
+        pumpkin.classList.add('lit');
+        if (!reduceMagicMotion) {
+          const r = pumpkin.getBoundingClientRect();
+          for (let i = 0; i < 12; i += 1) {
+            setTimeout(() => spawnViewportStar(r.left + r.width / 2 + (Math.random() - 0.5) * 60, r.top + (Math.random() - 0.5) * 30), i * 30);
+          }
+        }
+        findEgg('pumpkin', e.clientX, e.clientY);
+      });
+    }
+
+    // ---- bats flutter across the footer sky ----
+    const footerSkyStars = document.getElementById('footer-stars');
+    const footerEl = document.getElementById('site-footer');
+    if (footerSkyStars && footerEl && !reduceMagicMotion) {
+      const releaseBat = () => {
+        if (!isSpooky() || document.hidden) return;
+        const r = footerEl.getBoundingClientRect();
+        if (r.top > window.innerHeight || r.bottom < 0) return;
+        const bat = document.createElement('span');
+        bat.className = 'footer-bat';
+        bat.textContent = '🦇';
+        bat.style.top = `${8 + Math.random() * 40}%`;
+        bat.style.setProperty('--bat-size', `${1 + Math.random() * 0.9}rem`);
+        bat.style.setProperty('--bat-dur', `${5 + Math.random() * 3}s`);
+        if (Math.random() < 0.5) bat.classList.add('to-left');
+        footerSkyStars.appendChild(bat);
+        setTimeout(() => bat.remove(), 9000);
+      };
+      setInterval(releaseBat, 3800);
+    }
+
+    // ---- Halloween headlines, page by page (the everyday copy is restored
+    // the moment spooky mode is switched off) ----
+    const pageName = (window.location.pathname.split('/').pop() || 'index.html').replace('.html', '') || 'index';
+    const SPOOKY_COPY = {
+      index: [
+        ['.hero .eyebrow', '🎃 Web Developer &amp; Designer · Halloween Edition'],
+        ['.hero h1', 'Hi, I\'m Maya.<br>I build <span class="accent">spooky good</span> websites.'],
+        ['.hero .hero-tagline', 'Brewing websites with a dash of Halloween magic 🎃'],
+      ],
+      about: [['#about-top .hero-tagline', 'Dressed for Halloween, still designing with Maya Magic 🎃']],
+      services: [['.page-hero .eyebrow', 'What I Conjure'], ['.page-hero h1', 'My Craft, Haunted Edition']],
+      toolkit: [['.page-hero .eyebrow', 'The Potion Pantry']],
+      process: [['.page-hero .eyebrow', 'The Midnight Ritual']],
+      portfolio: [['.page-hero .eyebrow', 'The Haunted Library']],
+      contact: [['.invite-card .eyebrow', 'Summon Me']],
+    };
+    const copySwaps = (SPOOKY_COPY[pageName] || [])
+      .map(([sel, html]) => ({ el: document.querySelector(sel), html }))
+      .filter((s) => s.el);
+    copySwaps.forEach((s) => { s.everyday = s.el.innerHTML; });
+    const applyCopy = (on) => copySwaps.forEach((s) => { s.el.innerHTML = on ? s.html : s.everyday; });
+
+    const setSpooky = (on, remember) => {
+      document.documentElement.classList.toggle('spooky', on);
+      applyProps(on);
+      applyCopy(on);
+      if (banner) banner.hidden = !on;
+      if (pumpkin) pumpkin.hidden = !on;
+      syncToggle();
+      if (remember) {
+        try { localStorage.setItem('mayaSpooky', on ? 'on' : 'off'); } catch (e) { /* ignore */ }
+      }
+    };
+    toggle.addEventListener('click', () => {
+      const on = !isSpooky();
+      setSpooky(on, true);
+      showEggToast(on ? '🎃 <strong>Halloween mode on.</strong> Happy haunting!' : '✨ <strong>Halloween mode off.</strong> Back to everyday magic.', 2600);
+    });
+    setSpooky(isSpooky(), false);
   }
 
 });

@@ -25,6 +25,10 @@
   --sand-dark: #a78a5a;
   --ink: #614124;
   --ink-soft: #8a6f52;
+  /* dark fills (footer, buttons, cocoa cards) and the text that sits on them;
+     kept separate from --ink so a dark theme can flip text without flipping these */
+  --night: var(--ink);
+  --on-night: var(--cream-soft);
   --white: #ffffff;
 
   --green-rgb: 159, 192, 136;
@@ -161,14 +165,14 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
 }
 .btn-primary:hover::after, .btn-gold:hover::after { left: 130%; }
 
-.btn-primary { background: var(--ink); color: var(--cream-soft); }
+.btn-primary { background: var(--night); color: var(--on-night); }
 .btn-primary:hover { background: var(--gold-dark); box-shadow: var(--shadow-md); }
 
 .btn-gold { background: var(--gold); color: var(--white); }
 .btn-gold:hover { background: var(--gold-dark); box-shadow: var(--shadow-md); }
 
 .btn-outline { background: var(--cream-soft); border-color: var(--ink); color: var(--ink); border-width: 2.5px; }
-.btn-outline:hover { background: var(--ink); color: var(--cream-soft); }
+.btn-outline:hover { background: var(--night); color: var(--on-night); }
 
 .btn-small { padding: 12px 24px; font-size: 0.95rem; }
 
@@ -477,7 +481,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   transform: translate(-50%, -50%);
   width: 78px; height: 78px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--night);
   color: var(--sand);
   display: flex;
   align-items: center;
@@ -601,7 +605,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--ink);
+  background: var(--night);
 }
 .testimonial-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .testimonial-info { padding: 16px 10px 8px; text-align: center; }
@@ -622,7 +626,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   z-index: 2;
   margin: 56px 0 0;
   padding: 14px 0;
-  background: var(--ink);
+  background: var(--night);
   transform: skewY(-1.2deg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -641,7 +645,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.15rem;
-  color: var(--cream-soft);
+  color: var(--on-night);
   white-space: nowrap;
 }
 .skill-ribbon i { display: inline-block; transform: skewY(1.2deg); font-style: normal; color: var(--sand); font-size: 0.95rem; }
@@ -664,8 +668,8 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
     radial-gradient(1.5px 1.5px at 18% 22%, rgba(255, 248, 234, 0.8), transparent),
     radial-gradient(1.5px 1.5px at 72% 64%, rgba(255, 248, 234, 0.6), transparent),
     radial-gradient(1.5px 1.5px at 40% 88%, rgba(255, 248, 234, 0.5), transparent),
-    var(--ink);
-  color: var(--cream-soft);
+    var(--night);
+  color: var(--on-night);
   box-shadow: var(--shadow-md);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -676,11 +680,11 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
     radial-gradient(1.5px 1.5px at 22% 30%, rgba(255, 248, 234, 0.8), transparent),
     radial-gradient(1.5px 1.5px at 66% 76%, rgba(255, 248, 234, 0.6), transparent),
     radial-gradient(1.5px 1.5px at 88% 46%, rgba(255, 248, 234, 0.5), transparent),
-    var(--ink);
+    var(--night);
 }
 .spotlight-card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(97, 65, 36, 0.28); }
 .spotlight-card p { color: rgba(255, 248, 234, 0.78); }
-.spotlight-card h3 { color: var(--cream-soft); font-size: 1.45rem; margin: 0; }
+.spotlight-card h3 { color: var(--on-night); font-size: 1.45rem; margin: 0; }
 
 .spotlight-badge {
   position: absolute;
@@ -702,7 +706,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   width: 60px; height: 60px;
   border-radius: 18px;
   background: var(--green);
-  color: var(--ink);
+  color: var(--night);
   transform: rotate(-6deg);
   transition: transform 0.3s ease;
 }
@@ -731,7 +735,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   font-weight: 800;
   white-space: nowrap;
 }
-.flow-node--ai { background: var(--green); animation: aiGlow 2.4s ease-in-out infinite; }
+.flow-node--ai { background: var(--green); color: var(--night); animation: aiGlow 2.4s ease-in-out infinite; }
 @keyframes aiGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(var(--green-rgb), 0.6); } 50% { box-shadow: 0 0 0 7px rgba(var(--green-rgb), 0); } }
 .flow-link { position: relative; flex: 1; min-width: 14px; height: 2px; background: rgba(var(--sand-rgb), 0.35); border-radius: 2px; }
 .flow-link::after {
@@ -751,7 +755,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
 
 /* a pretend AI answer box that types itself out */
 .answer-demo p { margin: 0; }
-.answer-q { font-weight: 700; color: var(--cream-soft) !important; font-size: 0.92rem; margin-bottom: 10px !important; }
+.answer-q { font-weight: 700; color: var(--on-night) !important; font-size: 0.92rem; margin-bottom: 10px !important; }
 .answer-a { font-size: 0.9rem; line-height: 1.55; min-height: 4.7em; }
 .answer-label {
   display: inline-block;
@@ -759,7 +763,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   padding: 2px 9px;
   border-radius: 999px;
   background: var(--gold);
-  color: var(--cream-soft);
+  color: var(--on-night);
   font-size: 0.7rem;
   font-weight: 800;
   vertical-align: 1px;
@@ -777,7 +781,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   padding: 5px 12px;
   border-radius: 999px;
   background: rgba(255, 248, 234, 0.08);
-  color: var(--cream-soft);
+  color: var(--on-night);
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -855,7 +859,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
 
 .bento-card-back {
   transform: rotateY(180deg);
-  background: var(--ink);
+  background: var(--night);
   align-items: flex-start;
   justify-content: center;
 }
@@ -928,13 +932,13 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
 .pot-body {
   position: absolute; left: 6px; right: 6px; bottom: 10px; height: 74px;
   border-radius: 46% 46% 50% 50% / 30% 30% 70% 70%;
-  background: radial-gradient(circle at 32% 30%, #8a6a4a, var(--ink) 60%);
+  background: radial-gradient(circle at 32% 30%, #8a6a4a, var(--night) 60%);
   box-shadow: inset -8px -8px 0 rgba(0, 0, 0, 0.12);
 }
 .pot-rim {
   position: absolute; left: 0; right: 0; top: 30px; z-index: 2; height: 22px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--night);
   border: 4px solid var(--sand-dark);
   overflow: hidden;
 }
@@ -948,7 +952,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
 .cauldron-card.has-picks .pot-brew { background: linear-gradient(90deg, var(--green), var(--sand), var(--gold)); }
 .pot-legs::before, .pot-legs::after {
   content: ""; position: absolute; bottom: 2px; width: 12px; height: 14px;
-  border-radius: 0 0 6px 6px; background: var(--ink);
+  border-radius: 0 0 6px 6px; background: var(--night);
 }
 .pot-legs::before { left: 28px; }
 .pot-legs::after { right: 28px; }
@@ -1038,7 +1042,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   top: 50%;
   width: 12px; height: 12px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--night);
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
   transform: translateY(-50%);
 }
@@ -1054,7 +1058,7 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  color: var(--ink);
+  color: var(--night);
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1rem;
@@ -1134,9 +1138,9 @@ section { padding: 88px 0; position: relative; overflow: hidden; }
 button.chip { font-family: var(--font-body); cursor: pointer; }
 button.chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 button.chip[aria-pressed="true"] {
-  background: var(--ink);
+  background: var(--night);
   border-color: var(--ink);
-  color: var(--cream-soft);
+  color: var(--on-night);
 }
 button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; color: var(--sand); }
 
@@ -1147,7 +1151,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   flex-shrink: 0;
   padding: 3px 10px;
   border-radius: 999px;
-  background: var(--ink);
+  background: var(--night);
   color: var(--sand);
   font-size: 0.68rem;
   font-weight: 800;
@@ -1387,7 +1391,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   margin: 0 0 4px;
   padding: 7px 14px;
   border-radius: 8px;
-  background: var(--ink);
+  background: var(--night);
   color: var(--sand) !important;
   font-family: var(--font-display);
   font-weight: 600;
@@ -1400,7 +1404,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   padding: 0 7px;
   border-radius: 999px;
   background: var(--cat);
-  color: var(--ink);
+  color: var(--night);
   font-size: 0.8rem;
 }
 
@@ -1466,12 +1470,12 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease;
 }
 /* six cloth-bound spines from the brand palette, each paired for contrast */
-.book.p1, .book-cover.p1 { --book-bg: var(--ink); --book-ink: var(--sand); }
-.book.p2, .book-cover.p2 { --book-bg: var(--gold-dark); --book-ink: var(--cream-soft); }
-.book.p3, .book-cover.p3 { --book-bg: var(--green); --book-ink: var(--ink); }
-.book.p4, .book-cover.p4 { --book-bg: var(--sand); --book-ink: var(--ink); }
-.book.p5, .book-cover.p5 { --book-bg: #55734a; --book-ink: var(--cream-soft); }
-.book.p6, .book-cover.p6 { --book-bg: var(--cream-soft); --book-ink: var(--ink); }
+.book.p1, .book-cover.p1 { --book-bg: var(--night); --book-ink: var(--sand); }
+.book.p2, .book-cover.p2 { --book-bg: #935136; --book-ink: #fdf9f3; }
+.book.p3, .book-cover.p3 { --book-bg: var(--green); --book-ink: var(--night); }
+.book.p4, .book-cover.p4 { --book-bg: var(--sand); --book-ink: var(--night); }
+.book.p5, .book-cover.p5 { --book-bg: #55734a; --book-ink: #fdf9f3; }
+.book.p6, .book-cover.p6 { --book-bg: #fdf9f3; --book-ink: var(--night); }
 
 /* decorative bands across the spine, drawn in the spine's own text colour */
 .book::before,
@@ -2016,8 +2020,8 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   opacity: 0.5;
 }
 
-.hub-card--brown { background: var(--ink); }
-.hub-card--brown h3, .hub-card--brown .hub-chapter { color: var(--cream-soft); opacity: 0.85; }
+.hub-card--brown { background: var(--night); }
+.hub-card--brown h3, .hub-card--brown .hub-chapter { color: var(--on-night); opacity: 0.85; }
 .hub-card--brown p { color: rgba(253, 249, 243, 0.72); }
 .hub-card--brown .bento-icon { background: rgba(253, 249, 243, 0.18); color: var(--sand); }
 
@@ -2038,12 +2042,12 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   font-weight: 700;
   padding: 8px 14px;
   border-radius: 999px;
-  background: var(--ink);
-  color: var(--cream-soft);
+  background: var(--night);
+  color: var(--on-night);
   transition: transform 0.2s ease, background 0.2s ease, gap 0.2s ease;
 }
 .hub-card:hover .hub-card-link { transform: translateX(2px); gap: 9px; }
-.hub-card--brown .hub-card-link { background: var(--sand); color: var(--ink); }
+.hub-card--brown .hub-card-link { background: var(--sand); color: var(--night); }
 
 @media (max-width: 900px) {
   .hub-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2110,7 +2114,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   display: flex; align-items: center; justify-content: center;
   width: 58px; height: 58px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--night);
   font-size: 1.6rem;
   box-shadow: 0 0 0 4px var(--gold-soft);
   transform: rotate(-8deg);
@@ -2154,7 +2158,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   width: 72px; height: 72px;
   margin: 0 auto 16px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--night);
   font-size: 2.1rem;
   box-shadow: 0 0 0 8px var(--parchment), var(--shadow-md);
   transition: transform 0.4s cubic-bezier(.22,1,.36,1);
@@ -2208,7 +2212,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
 .cta-night p:not(.eyebrow) { max-width: 480px; margin: 0 auto 28px; color: var(--ink); }
 .cta-night-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
 .btn-ghost-ink { background: rgba(255, 255, 255, 0.35); border-color: var(--ink); color: var(--ink); border-width: 2px; }
-.btn-ghost-ink:hover { background: var(--ink); border-color: var(--ink); color: var(--cream-soft); }
+.btn-ghost-ink:hover { background: var(--night); border-color: var(--ink); color: var(--on-night); }
 @media (max-width: 640px) { .about-cta { padding-bottom: 82px; } }
 
 @media (max-width: 900px) {
@@ -2260,14 +2264,14 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
 
 .love-card--quote {
   grid-column: 1 / -1;
-  background: var(--ink);
+  background: var(--night);
   text-align: center;
   padding: 40px 30px;
 }
 .love-card--quote:hover { transform: translateY(-6px) scale(1.01) rotate(0); }
 .love-card--quote .love-icon { background: rgba(253, 249, 243, 0.15); color: var(--sand); margin: 0 auto 16px; }
 .love-card--quote .love-label { color: var(--sand); }
-.love-quote-text { font-family: var(--font-script); font-size: 1.7rem; color: var(--cream-soft); max-width: 560px; margin: 0 auto 10px; line-height: 1.4; }
+.love-quote-text { font-family: var(--font-script); font-size: 1.7rem; color: var(--on-night); max-width: 560px; margin: 0 auto 10px; line-height: 1.4; }
 .love-quote-attr { font-size: 0.85rem; font-weight: 700; color: rgba(253, 249, 243, 0.65); }
 
 @media (max-width: 760px) {
@@ -2288,7 +2292,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   align-items: center;
   gap: 9px;
   background: var(--green);
-  color: var(--cream-soft);
+  color: var(--night);
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.94rem;
@@ -2297,7 +2301,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   box-shadow: var(--shadow-md);
   transition: transform 0.25s ease, background 0.2s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
-.email-fab:hover { background: var(--green-dark); transform: translateY(-3px); box-shadow: 0 16px 34px rgba(58, 53, 44, 0.22); }
+.email-fab:hover { background: #b0cd9b; transform: translateY(-3px); box-shadow: 0 16px 34px rgba(58, 53, 44, 0.22); }
 .email-fab.is-hidden { opacity: 0; pointer-events: none; transform: translateY(12px); }
 @media (max-width: 560px) {
   .email-fab { right: 16px; bottom: 16px; padding: 14px; }
@@ -2312,8 +2316,8 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   top: 90px;
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
-  background: var(--ink);
-  color: var(--cream-soft);
+  background: var(--night);
+  color: var(--on-night);
   font-weight: 700;
   font-size: 0.9rem;
   width: max-content;
@@ -2339,7 +2343,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   background:
     radial-gradient(460px 200px at 18% 62%, rgba(var(--gold-rgb), 0.22), transparent),
     radial-gradient(420px 200px at 88% 100%, rgba(var(--green-rgb), 0.16), transparent),
-    var(--ink);
+    var(--night);
   color: rgba(255, 248, 234, 0.75);
   padding: 56px 0 0;
 }
@@ -2352,7 +2356,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   bottom: calc(100% - 1px); left: 0; right: 0;
   height: 22px;
   /* tiles are taller than the strip so their top seam never renders */
-  background: radial-gradient(circle at 50% 100%, var(--ink) 21px, transparent 21.5px) repeat-x left bottom / 44px 40px;
+  background: radial-gradient(circle at 50% 100%, var(--night) 21px, transparent 21.5px) repeat-x left bottom / 44px 40px;
   pointer-events: none;
 }
 
@@ -2411,7 +2415,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   padding-bottom: 36px;
 }
 
-.footer-logo { font-family: var(--font-display); font-size: 1.9rem; font-weight: 600; color: var(--cream-soft); }
+.footer-logo { font-family: var(--font-display); font-size: 1.9rem; font-weight: 600; color: var(--on-night); }
 .footer-role { font-family: var(--font-script); font-size: 1.4rem; font-weight: 600; color: var(--sand) !important; margin: 0 0 12px; }
 .footer-blurb { max-width: 340px; font-size: 0.96rem; }
 .footer-chips { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -2422,7 +2426,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   border: 1px solid rgba(var(--sand-rgb), 0.35);
   background: rgba(255, 248, 234, 0.06);
   font-size: 0.86rem; font-weight: 700;
-  color: var(--cream-soft);
+  color: var(--on-night);
   overflow-wrap: anywhere;
   transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
@@ -2462,7 +2466,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   border: 0;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--sand), var(--gold));
-  color: var(--ink);
+  color: var(--night);
   font: 700 0.95rem var(--font-body);
   cursor: pointer;
   box-shadow: 0 0 0 0 rgba(var(--sand-rgb), 0.5);
@@ -2482,7 +2486,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
   font-family: var(--font-script);
   font-size: 1.35rem;
   line-height: 1.25;
-  color: var(--cream-soft) !important;
+  color: var(--on-night) !important;
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -2512,7 +2516,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
 }
 .footer-bottom p { margin: 0; font-size: 0.86rem; color: rgba(255, 248, 234, 0.55); }
 .back-to-top { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 700; color: var(--sand); }
-.back-to-top:hover { color: var(--cream-soft); }
+.back-to-top:hover { color: var(--on-night); }
 .back-to-top .broom { display: inline-block; transition: transform 0.35s ease; }
 .back-to-top:hover .broom { transform: translateY(-4px) rotate(-25deg); }
 .back-to-top.flying .broom { animation: broomFly 0.9s ease-in forwards; }
@@ -2631,7 +2635,7 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
 }
 .egg-meter span { color: var(--sand); }
 .egg-meter strong { margin-left: 4px; color: var(--sand); }
-.egg-meter:hover, .egg-meter:focus-visible { color: var(--cream-soft); }
+.egg-meter:hover, .egg-meter:focus-visible { color: var(--on-night); }
 .egg-meter:focus-visible { outline: 2px solid var(--sand); outline-offset: 4px; border-radius: 4px; }
 
 /* the footer moon is secretly clickable */
@@ -2718,4 +2722,346 @@ button.chip[aria-pressed="true"]::before { content: "✦"; margin-right: 6px; co
 @media (max-width: 640px) {
   .lurker { width: 78px; height: 60px; margin-left: -39px; }
   .egg-toast { bottom: 90px; font-size: 0.86rem; }
+}
+
+/* ==========================================================================
+   Spooky mode (Halloween): everything below only applies while <html> has
+   the .spooky class, which the script sets from Oct 24 to Nov 2
+   ========================================================================== */
+:root { --pumpkin: #e8772e; --pumpkin-soft: #f6a35c; --plum: #4b2c4a; }
+
+/* a cobweb, drawn once and reused in a few corners */
+.spooky .hero::before,
+.spooky .bookcase-inner::before,
+.spooky .bookcase-inner::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 110px;
+  height: 110px;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23614124' stroke-opacity='.38' stroke-width='1.1'%3E%3Cpath d='M0 0L100 0M0 0L100 50M0 0L100 100M0 0L50 100M0 0L0 100'/%3E%3Cpath d='M22 0Q20 10 20 11Q10 20 0 22M44 0Q40 20 40 22Q34 34 22 40Q12 42 0 44M68 0Q62 30 60 34Q52 52 34 60Q28 62 0 68M92 0Q84 40 80 46Q70 70 46 80Q38 84 0 92'/%3E%3C/svg%3E") no-repeat top left / contain;
+}
+.spooky .hero::before { top: 0; left: 0; }
+.spooky .bookcase-inner { position: relative; }
+.spooky .bookcase-inner::before { top: 0; left: 0; }
+.spooky .bookcase-inner::after { top: 0; right: 0; transform: scaleX(-1); }
+
+/* the footer: a harvest moon, a plum tint in the sky, and bats */
+.spooky .site-footer {
+  background:
+    radial-gradient(520px 230px at 86% 12%, rgba(75, 44, 74, 0.6), transparent),
+    radial-gradient(460px 200px at 18% 62%, rgba(232, 119, 46, 0.2), transparent),
+    var(--night);
+}
+.spooky .footer-moon {
+  box-shadow: inset -14px 6px 0 0 var(--pumpkin);
+  filter: drop-shadow(0 0 18px rgba(232, 119, 46, 0.75));
+}
+.footer-bat {
+  position: absolute;
+  left: -40px;
+  font-size: var(--bat-size, 1.3rem);
+  line-height: 1;
+  pointer-events: none;
+  animation: batFly var(--bat-dur, 6s) linear forwards, batFlap 0.32s ease-in-out infinite alternate;
+}
+.footer-bat.to-left { left: auto; right: -40px; animation-name: batFlyLeft, batFlapLeft; }
+@keyframes batFly {
+  0% { translate: 0 0; }
+  25% { translate: 26vw -18px; }
+  50% { translate: 52vw 10px; }
+  75% { translate: 78vw -14px; }
+  100% { translate: calc(100vw + 80px) 0; }
+}
+@keyframes batFlyLeft {
+  0% { translate: 0 0; }
+  25% { translate: -26vw -18px; }
+  50% { translate: -52vw 10px; }
+  75% { translate: -78vw -14px; }
+  100% { translate: calc(-100vw - 80px) 0; }
+}
+@keyframes batFlap { from { scale: 1 1; } to { scale: 1 0.6; } }
+@keyframes batFlapLeft { from { scale: -1 1; } to { scale: -1 0.6; } }
+
+/* Wisp borrows a witch hat */
+.spooky .wisp::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  z-index: 2;
+  width: 38px;
+  height: 32px;
+  translate: -46% 0;
+  rotate: -14deg;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 34'%3E%3Cellipse cx='20' cy='29' rx='19' ry='4.5' fill='%233b2613'/%3E%3Cpath d='M9 29C12 20 16 10 22 2c1 3 4 5 8 4-5 4-2 14 1 23Z' fill='%233b2613'/%3E%3Cpath d='M10.5 24h20.5l.8 3.4H9.6Z' fill='%23e8772e'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* Midnight's eyes glow pumpkin orange */
+.spooky .lurker-eyes { filter: drop-shadow(0 0 4px rgba(232, 119, 46, 0.95)); }
+.spooky .lurker-eyes ellipse:not(.lurker-pupil) { fill: var(--pumpkin-soft); }
+
+/* the bookcase: flickering candles beside the title, glowing covers */
+.spooky .bookcase-crown span::before,
+.spooky .bookcase-crown span::after {
+  content: "🕯️";
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 1.1rem;
+  animation: candleFlicker 1.8s ease-in-out infinite;
+}
+.spooky .bookcase-crown span::after { animation-delay: 0.7s; }
+@keyframes candleFlicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px rgba(246, 163, 92, 0.9)); }
+  40% { opacity: 0.8; filter: drop-shadow(0 0 2px rgba(246, 163, 92, 0.5)); }
+  60% { opacity: 1; filter: drop-shadow(0 0 10px rgba(246, 163, 92, 1)); }
+}
+.spooky .book-cover .cover-face {
+  box-shadow:
+    5px 3px 0 -1px var(--cream-soft),
+    9px 6px 0 -2px var(--parchment),
+    0 0 36px rgba(232, 119, 46, 0.45),
+    0 0 80px rgba(75, 44, 74, 0.4),
+    0 26px 50px rgba(97, 65, 36, 0.45);
+}
+
+/* the pumpkin toggle sits just above Wisp */
+.spooky-toggle {
+  position: fixed;
+  left: 30px;
+  bottom: 114px;
+  z-index: 199;
+  display: flex; align-items: center; justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--pumpkin);
+  background: var(--white);
+  font-size: 1.35rem;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+}
+.spooky-toggle:hover { transform: scale(1.12) rotate(-10deg); }
+.spooky-toggle[aria-pressed="false"] { filter: grayscale(1); opacity: 0.6; border-color: var(--ink-soft); }
+.spooky-toggle:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* the home page banner */
+.spooky-banner {
+  position: relative;
+  z-index: 101;
+  padding: 10px 52px;
+  background: linear-gradient(90deg, var(--plum), var(--night) 50%, var(--plum));
+  color: var(--on-night);
+  text-align: center;
+}
+.spooky-banner[hidden] { display: none; }
+.spooky-banner p { margin: 0; font-size: 0.92rem; font-weight: 600; color: var(--on-night); }
+.spooky-banner strong { color: var(--pumpkin-soft); }
+.spooky-banner-close {
+  position: absolute;
+  top: 50%; right: 14px;
+  translate: 0 -50%;
+  width: 30px; height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 248, 234, 0.12);
+  color: var(--on-night);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.spooky-banner-close:hover { background: rgba(255, 248, 234, 0.25); }
+
+/* the hidden pumpkin: small, low in a corner, a little shy */
+.hidden-pumpkin {
+  position: absolute;
+  bottom: 16px;
+  z-index: 5;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 1.45rem;
+  line-height: 1;
+  opacity: 0.88;
+  rotate: -8deg;
+  cursor: pointer;
+  animation: pumpkinWobble 4s ease-in-out infinite;
+}
+.hidden-pumpkin[hidden] { display: none; }
+.hidden-pumpkin em {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  translate: -50% 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--plum);
+  color: var(--pumpkin-soft);
+  font: 700 0.72rem var(--font-body);
+  font-style: normal;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, translate 0.2s ease;
+}
+.hidden-pumpkin.lit { animation: pumpkinLight 1.4s ease forwards; }
+.hidden-pumpkin.lit em { opacity: 1; translate: -50% 0; }
+.hidden-pumpkin:focus-visible { outline: 3px solid var(--pumpkin); outline-offset: 4px; border-radius: 8px; }
+@keyframes pumpkinWobble { 0%, 100% { rotate: -8deg; } 50% { rotate: 6deg; } }
+@keyframes pumpkinLight {
+  0% { scale: 1; filter: none; }
+  30% { scale: 1.6; filter: drop-shadow(0 0 14px rgba(232, 119, 46, 1)); }
+  100% { scale: 1.25; filter: drop-shadow(0 0 8px rgba(232, 119, 46, 0.85)); }
+}
+
+@media (max-width: 640px) {
+  .spooky-toggle { left: 19px; bottom: 96px; width: 40px; height: 40px; font-size: 1.2rem; }
+  .spooky-banner { padding: 9px 44px 9px 16px; text-align: left; }
+  .spooky-banner p { font-size: 0.84rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hidden-pumpkin, .spooky .bookcase-crown span::before, .spooky .bookcase-crown span::after { animation: none; }
+}
+/* leave room at the very bottom of the footer for Wisp and the pumpkin toggle */
+@media (max-width: 1320px) {
+  .has-spooky-toggle .site-footer .footer-bottom { padding-bottom: 170px; }
+}
+@media (max-width: 640px) {
+  .has-spooky-toggle .site-footer .footer-bottom { padding-bottom: 150px; }
+}
+
+/* ==========================================================================
+   Spooky mode, part two: the whole site turns into a haunted night.
+   The palette tokens flip, so every page follows without per-page rules;
+   the few hard-coded light surfaces are overridden below.
+   ========================================================================== */
+html.spooky {
+  color-scheme: dark;
+  --cream: #1a111c;          /* the page itself: plum-black night */
+  --cream-soft: #261a2b;     /* raised surfaces */
+  --white: #2d2033;          /* cards */
+  --parchment: #21172a;      /* alternate sections */
+  --ink: #f4e8d6;            /* text turns candle-light */
+  --ink-soft: #cbb7a8;
+  --night: #110b13;          /* dark fills stay dark */
+  --on-night: #f7ecdc;
+  --gold: #e8772e;           /* terracotta glows into pumpkin */
+  --gold-dark: #f6a35c;      /* accent text, lightened to read on dark */
+  --gold-soft: #4a2a25;
+  --green-dark: #b5d69a;
+  --green-soft: #2b3626;
+  --sand-dark: #b48d55;
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+.spooky body {
+  background:
+    radial-gradient(900px 500px at 85% -5%, rgba(75, 44, 74, 0.55), transparent),
+    radial-gradient(700px 420px at 0% 30%, rgba(232, 119, 46, 0.08), transparent),
+    var(--cream);
+}
+.spooky ::selection { background: var(--pumpkin); color: var(--night); }
+
+/* the header pill becomes smoked glass */
+.spooky .header-inner { background: rgba(26, 17, 28, 0.86); border-color: rgba(246, 163, 92, 0.18); }
+.spooky .nav-link { color: var(--ink-soft); }
+.spooky .nav-link:hover, .spooky .nav-link.active { color: var(--pumpkin-soft); }
+@media (max-width: 640px) { .spooky .site-nav { background: var(--cream-soft); } }
+.spooky .maya-hair { fill: #8a5a36; }
+
+/* section heads get a pumpkin glow on their eyebrows */
+.spooky .eyebrow { color: var(--pumpkin-soft); text-shadow: 0 0 12px rgba(232, 119, 46, 0.45); }
+.spooky h1, .spooky h2 { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45); }
+.spooky .accent { color: var(--pumpkin-soft); text-shadow: 0 0 22px rgba(232, 119, 46, 0.55); }
+
+/* buttons */
+.spooky .btn-primary { background: var(--pumpkin); color: var(--night); }
+.spooky .btn-primary:hover { background: var(--pumpkin-soft); }
+.spooky .btn-gold { background: var(--plum); color: var(--on-night); box-shadow: 0 0 0 1px rgba(246, 163, 92, 0.35); }
+.spooky .btn-gold:hover { background: #5e3a5c; }
+.spooky .btn-outline { background: transparent; border-color: var(--pumpkin-soft); color: var(--ink); }
+.spooky .btn-outline:hover { background: var(--pumpkin-soft); color: var(--night); }
+
+/* cards pick up a faint candle glow at the edges */
+.spooky .bento-card-front, .spooky .journey-card, .spooky .love-card, .spooky .fact-file,
+.spooky .accordion, .spooky .moon-step > p:last-child, .spooky .testimonial-card, .spooky .hub-card,
+.spooky .invite-card, .spooky .chapter-link {
+  border-color: rgba(246, 163, 92, 0.14);
+  box-shadow: 0 0 0 1px rgba(246, 163, 92, 0.08), var(--shadow-sm);
+}
+.spooky .chip { background: var(--cream-soft); color: var(--green-dark); border-color: rgba(181, 214, 154, 0.3); }
+
+/* the bookcase back panel goes dark wood */
+.spooky .bookcase-inner {
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 1px, transparent 1px 26px),
+    linear-gradient(180deg, #3a2a20, #2a1d16);
+  box-shadow: inset 0 10px 24px rgba(0, 0, 0, 0.55);
+}
+.spooky .bookcase-inner::before, .spooky .bookcase-inner::after, .spooky .hero::before { filter: invert(1) brightness(1.4); opacity: 0.55; }
+.spooky .shelf-plaque { background: var(--plum); }
+
+/* the sage call-to-action card on About becomes a haunted night card */
+.spooky .cta-night {
+  background:
+    radial-gradient(2px 2px at 14% 26%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 70% 16%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(420px 220px at 50% 0%, rgba(232, 119, 46, 0.35), transparent),
+    linear-gradient(160deg, var(--plum), var(--night));
+  border-color: rgba(246, 163, 92, 0.3);
+}
+.spooky .cta-night .eyebrow { color: var(--pumpkin-soft); opacity: 1; }
+.spooky .cta-night h2, .spooky .cta-night p:not(.eyebrow) { color: var(--on-night); }
+.spooky .btn-ghost-ink { background: transparent; border-color: var(--pumpkin-soft); color: var(--on-night); }
+
+/* blobs turn into plum and pumpkin glows; every hero gets a moon and fog */
+.spooky .blob-green { background: rgba(75, 44, 74, 0.9); }
+.spooky .blob-tan { background: rgba(232, 119, 46, 0.35); }
+.spooky .hero .blob-layer::after {
+  content: "";
+  position: absolute;
+  top: 9%;
+  right: 7%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 36%, #fff3d6, #f6c27a 55%, #e8772e);
+  box-shadow: 0 0 60px 18px rgba(246, 163, 92, 0.45), 0 0 140px 40px rgba(232, 119, 46, 0.2);
+  opacity: 0.9;
+}
+.spooky .hero::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: 0;
+  height: 140px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 60% at 20% 100%, rgba(203, 183, 168, 0.1), transparent 70%),
+    radial-gradient(45% 70% at 60% 100%, rgba(203, 183, 168, 0.08), transparent 70%),
+    radial-gradient(35% 55% at 90% 100%, rgba(203, 183, 168, 0.09), transparent 70%);
+  animation: fogDrift 14s ease-in-out infinite alternate;
+}
+.spooky .hero > .container { position: relative; z-index: 1; }
+@keyframes fogDrift { from { translate: -3% 0; } to { translate: 3% 0; } }
+@media (prefers-reduced-motion: reduce) { .spooky .hero::after { animation: none; } }
+
+/* Maya's costume only appears in spooky mode */
+.maya-costume { display: none; }
+.spooky .maya-costume { display: inline; }
+.spooky .maya-hat-fill { fill: var(--plum); }
+.spooky .maya-hat-band { fill: var(--pumpkin); }
+.spooky .maya-lantern { filter: drop-shadow(0 0 10px rgba(255, 170, 60, 0.95)); }
+/* the moon scales with the screen and tucks into the corner when space is tight,
+   so it never sits behind the headline or tagline */
+.spooky .hero .blob-layer::after { width: clamp(64px, 8.5vw, 120px); height: clamp(64px, 8.5vw, 120px); }
+@media (max-width: 1100px) {
+  .spooky .hero .blob-layer::after { top: 3%; right: 3%; opacity: 0.7; }
+  .spooky .hero:not(.page-hero) .blob-layer::after { top: auto; bottom: 6%; right: 4%; }
 }
