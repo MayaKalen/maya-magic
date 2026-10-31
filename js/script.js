@@ -610,9 +610,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    // "Fly back up" points at the header, but the header is sticky, so the
+    // browser thinks it is already in view and barely scrolls. Scroll to the
+    // very top ourselves instead, then hand keyboard focus back to the header.
     const backToTop = document.getElementById('back-to-top');
-    if (backToTop && !prefersReducedMotion) {
-      backToTop.addEventListener('click', () => {
+    if (backToTop) {
+      backToTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        const firstLink = document.querySelector('.site-header a');
+        if (firstLink) firstLink.focus({ preventScroll: true });
+        if (prefersReducedMotion) return;
         backToTop.classList.remove('flying');
         void backToTop.offsetWidth;
         backToTop.classList.add('flying');
@@ -1407,7 +1415,7 @@ document.addEventListener('DOMContentLoaded', () => {
       banner = document.createElement('div');
       banner.className = 'spooky-banner';
       banner.setAttribute('role', 'note');
-      banner.innerHTML = `<p><span aria-hidden="true">🎃</span> Happy Halloween from the Maya Magic world! A pumpkin is hiding somewhere on this site. <strong>Find it for a treat.</strong></p>
+      banner.innerHTML = `<p><span aria-hidden="true">🎃</span> Happy Halloween<span class="banner-long"> from the Maya Magic world</span>! A pumpkin is hiding<span class="banner-long"> somewhere</span> on this site. <strong>Find it for a treat.</strong></p>
         <button type="button" class="spooky-banner-close" aria-label="Close the Halloween banner">×</button>`;
       document.body.insertBefore(banner, document.body.firstChild);
       banner.querySelector('.spooky-banner-close').addEventListener('click', () => {
