@@ -5,10 +5,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ---- Spooky season: Halloween mode switches itself on from Oct 24 to
-  // Nov 2. Visitors can turn it off with the pumpkin toggle, and
+  // Nov 13. Visitors can turn it off with the pumpkin toggle, and
   // ?spooky=1 / ?spooky=0 previews it any time of year ----
   const today = new Date();
-  const inSpookySeason = (today.getMonth() === 9 && today.getDate() >= 24) || (today.getMonth() === 10 && today.getDate() <= 2);
+  const inSpookySeason = (today.getMonth() === 9 && today.getDate() >= 24) || (today.getMonth() === 10 && today.getDate() <= 13);
   const spookyParam = new URLSearchParams(window.location.search).get('spooky');
   let spookyChoice = null;
   try { spookyChoice = localStorage.getItem('mayaSpooky'); } catch (e) { /* ignore */ }
